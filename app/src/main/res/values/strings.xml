@@ -2,4 +2,5 @@
     <string name="app_name">BaHotH Assistant</string>
     <string name="menu_header_desc">Header image for main menu</string>
     <string name="menu_title_desc">Title image for main menu</string>
+    <string name="new_game_btn_text">New Game</string>
 </resources>
