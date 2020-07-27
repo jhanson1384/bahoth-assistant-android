@@ -261,6 +261,9 @@ public class PlayerCharacter {
         }
     }
 
+    //Accessor methods
+    public String getName() { return this.name; }
+
     //DATA MEMBERS
     private String name;
     //Player color, no two players can choose a character with the same color

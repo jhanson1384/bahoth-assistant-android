@@ -1,6 +1,8 @@
 package com.jhanson1384.bahothassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
@@ -11,6 +13,10 @@ public class ChooseCharacterActivity extends AppCompatActivity {
     private PlayerCharacter[] all_characters;
     //ArrayList of available characters (can be filtered based on color)
     private ArrayList<PlayerCharacter> available_characters;
+    //RecyclerView for list of characters and associated objects
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,13 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         initAllCharacters();
         //Populate available_characters list, initially contains all characters
         initAvailCharacters();
+
+        //Setup RecyclerView and associated classes to display characters to choose from
+        mRecyclerView = (RecyclerView) findViewById(R.id.choose_character_recycler_view);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new ChooseCharacterAdapter(available_characters);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initAllCharacters(){
