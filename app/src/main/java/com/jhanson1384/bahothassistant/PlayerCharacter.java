@@ -261,8 +261,38 @@ public class PlayerCharacter {
         }
     }
 
+
     //Accessor methods
     public String getName() { return this.name; }
+
+    //Determine speed by indexing into stats scale
+    public int getSpeed() {
+        //Index may be zero if character is dead
+        if (speed_ind < 0) return 0;
+        return speed_scale[speed_ind];
+    }
+
+    //Determine might by indexing into stats scale
+    public int getMight() {
+        //Index may be zero if character is dead
+        if (might_ind < 0) return 0;
+        return might_scale[might_ind];
+    }
+
+    //Determine sanity by indexing into stats scale
+    public int getSanity() {
+        //Index may be zero if character is dead
+        if (sanity_ind < 0) return 0;
+        return sanity_scale[sanity_ind];
+    }
+
+    //Determine knowledge by indexing into stats scale
+    public int getKnowledge() {
+        //Index may be zero if character is dead
+        if (knowledge_ind < 0) return 0;
+        return knowledge_scale[knowledge_ind];
+    }
+
 
     //DATA MEMBERS
     private String name;
