@@ -24,6 +24,7 @@ public class PlayerCharacter {
                 this.birth_day = 14;
                 this.brief_desc = "A creepy little girl, who wants to be a doctor. She cuts up dead things, for fun. Missy then has nightmares about them.";
                 this.fears = "Dead things coming back to life to haunt her.";
+                this.portrait_id = R.drawable.missy_circle_img;
                 break;
             case ZOE:
                 this.name = "Zoe Ingstrom";
@@ -45,6 +46,7 @@ public class PlayerCharacter {
                 this.birth_day = 5;
                 this.brief_desc = "Zoe has an implied tragic story. Raised in an unhappy home, she uses dolls to express her emotions.";
                 this.fears = "The Boogeyman.";
+                this.portrait_id = R.drawable.zoe_circle_img;
                 break;
             case JENNY:
                 this.name = "Jenny LeClerc";
@@ -66,6 +68,7 @@ public class PlayerCharacter {
                 this.birth_day = 4;
                 this.brief_desc = "A quiet bookworm whose mother disappeared when she was younger. Jenny feels always alone.";
                 this.fears = "Being trapped in a crowd or lost in the open air.";
+                this.portrait_id = R.drawable.jenny_circle_img;
                 break;
             case HEATHER:
                 this.name = "Heather Granville";
@@ -87,6 +90,7 @@ public class PlayerCharacter {
                 this.birth_day = 2;
                 this.brief_desc = "Seen as perfect in both her eyes and the eyes of others, when things aren’t perfect she suffers from headaches. She keeps smiling anyway.";
                 this.fears = "Not being perfect.";
+                this.portrait_id = R.drawable.heather_circle_img;
                 break;
             case ZOSTRA:
                 this.name = "Madame Zostra";
@@ -108,6 +112,7 @@ public class PlayerCharacter {
                 this.birth_day = 10;
                 this.brief_desc = "Also known as Belladina, Madame Zostra is a tarot card reader and tea-leaf reader with her own stay-at-home astrology business.";
                 this.fears = "Death, especially that of her self.";
+                this.portrait_id = R.drawable.zostra_circle_img;
                 break;
             case VIVIAN:
                 this.name = "Vivian Lopez";
@@ -129,6 +134,7 @@ public class PlayerCharacter {
                 this.birth_day = 11;
                 this.brief_desc = "A small bookshop owner who, when finances become difficult, has thoughts of arson.";
                 this.fears = "The same as one of her greatest loves – fire.";
+                this.portrait_id = R.drawable.vivian_circle_img;
                 break;
             case DARRIN:
                 this.name = "Darrin \"Flash\" Williams";
@@ -150,6 +156,7 @@ public class PlayerCharacter {
                 this.birth_day = 6;
                 this.brief_desc = "Flash is a paranoid runner, who can’t help but shake the feeling that something is chasing him.";
                 this.fears = "Getting caught by that which is chasing him.";
+                this.portrait_id = R.drawable.flash_circle_img;
                 break;
             case OX:
                 this.name = "Ox Bellows";
@@ -171,6 +178,7 @@ public class PlayerCharacter {
                 this.birth_day = 18;
                 this.brief_desc = "A big kid who once had to lash out. Ox is now haunted by his past and what he did that one time.";
                 this.fears = "The dark.";
+                this.portrait_id = R.drawable.ox_circle_img;
                 break;
             case BRANDON:
                 this.name = "Brandon Jaspers";
@@ -192,6 +200,7 @@ public class PlayerCharacter {
                 this.birth_day = 12;
                 this.brief_desc = "A kid who never liked playing with traditional toys, Brandon could swear his old puppet was moving closer to him when he slept.";
                 this.fears = "Puppets, especially those of the clown variety.";
+                this.portrait_id = R.drawable.brandon_circle_img;
                 break;
             case PETER:
                 this.name = "Peter Akimoto";
@@ -213,6 +222,7 @@ public class PlayerCharacter {
                 this.birth_day = 3;
                 this.brief_desc = "Seriously bullied by his family, Peter liked to hide under his house and look at bugs. He wants to be an entomologist.";
                 this.fears = "Getting caught somewhere he can’t get out.";
+                this.portrait_id = R.drawable.peter_circle_img;
                 break;
             case RHINEHARDT:
                 this.name = "Father Rhinehardt";
@@ -234,6 +244,7 @@ public class PlayerCharacter {
                 this.birth_day = 29;
                 this.brief_desc = "A man who turned to religion to escape persecution, Father Rhinehardt is haunted by the mad whispers of the confessional booth.";
                 this.fears = "Going mad.";
+                this.portrait_id = R.drawable.rhinehardt_circle_img;
                 break;
             case LONGFELLOW:
                 this.name = "Professor Longfellow";
@@ -255,6 +266,7 @@ public class PlayerCharacter {
                 this.birth_day = 27;
                 this.brief_desc = "An aristocrat by birth, Professor Longfellow now lives with his mother, broke and wondering about her life insurance policy.";
                 this.fears = "Losing everything he has.";
+                this.portrait_id = R.drawable.longfellow_circle_img;
                 break;
             default:
                 throw new RuntimeException("Invalid argument to PlayerCharacter Constructor");
@@ -264,6 +276,7 @@ public class PlayerCharacter {
 
     //Accessor methods
     public String getName() { return this.name; }
+    public int getPortraitID() { return this.portrait_id; }
 
     //Determine speed by indexing into stats scale
     public int getSpeed() {
@@ -324,4 +337,6 @@ public class PlayerCharacter {
     private String brief_desc;
     //Character's fears
     private String fears;
+    //ID for character picture
+    private int portrait_id;
 }

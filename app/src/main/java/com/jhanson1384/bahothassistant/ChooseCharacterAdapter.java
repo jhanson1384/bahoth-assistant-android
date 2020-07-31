@@ -3,6 +3,7 @@ package com.jhanson1384.bahothassistant;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class ChooseCharacterAdapter
         public TextView might;
         public TextView sanity;
         public TextView knowledge;
+        public ImageView portrait;
 
         CharacterOverviewViewHolder(View v){
             super(v);
@@ -28,6 +30,7 @@ public class ChooseCharacterAdapter
             might = (TextView) v.findViewById(R.id.character_overview_might);
             sanity = (TextView) v.findViewById(R.id.character_overview_sanity);
             knowledge = (TextView) v.findViewById(R.id.character_overview_knowledge);
+            portrait = (ImageView) v.findViewById(R.id.character_overview_portrait);
         }
     }
 
@@ -52,6 +55,7 @@ public class ChooseCharacterAdapter
         holder.might.setText(Integer.toString(available_characters.get(index).getMight()));
         holder.sanity.setText(Integer.toString(available_characters.get(index).getSanity()));
         holder.knowledge.setText(Integer.toString(available_characters.get(index).getKnowledge()));
+        holder.portrait.setImageResource(available_characters.get(index).getPortraitID());
     }
 
     @Override
