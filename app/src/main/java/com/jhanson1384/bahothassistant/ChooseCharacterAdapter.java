@@ -51,10 +51,10 @@ public class ChooseCharacterAdapter
     @Override
     public void onBindViewHolder(CharacterOverviewViewHolder holder, int index){
         holder.character_name.setText(available_characters.get(index).getName());
-        holder.speed.setText(Integer.toString(available_characters.get(index).getSpeed()));
-        holder.might.setText(Integer.toString(available_characters.get(index).getMight()));
-        holder.sanity.setText(Integer.toString(available_characters.get(index).getSanity()));
-        holder.knowledge.setText(Integer.toString(available_characters.get(index).getKnowledge()));
+        holder.speed.setText(available_characters.get(index).displaySpeed());
+        holder.might.setText(available_characters.get(index).displayMight());
+        holder.sanity.setText(available_characters.get(index).displaySanity());
+        holder.knowledge.setText(available_characters.get(index).displayKnowledge());
         holder.portrait.setImageResource(available_characters.get(index).getPortraitID());
     }
 
