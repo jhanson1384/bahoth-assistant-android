@@ -277,6 +277,7 @@ public class PlayerCharacter {
     //Accessor methods
     public String getName() { return this.name; }
     public int getPortraitID() { return this.portrait_id; }
+    public PlayerColor getColor() { return this.color; }
 
     //Determine speed by indexing into stats scale
     public int getSpeed() {
@@ -313,9 +314,7 @@ public class PlayerCharacter {
     public String displaySanity(){
         return "Sanity: " + Integer.toString(this.getSanity());
     }
-    public String displayKnowledge(){
-        return "Knowledge: " + Integer.toString(this.getKnowledge());
-    }
+    public String displayKnowledge(){ return "Knowledge: " + Integer.toString(this.getKnowledge()); }
 
 
 

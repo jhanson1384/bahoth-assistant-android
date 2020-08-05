@@ -50,12 +50,15 @@ public class ChooseCharacterAdapter
 
     @Override
     public void onBindViewHolder(CharacterOverviewViewHolder holder, int index){
-        holder.character_name.setText(available_characters.get(index).getName());
-        holder.speed.setText(available_characters.get(index).displaySpeed());
-        holder.might.setText(available_characters.get(index).displayMight());
-        holder.sanity.setText(available_characters.get(index).displaySanity());
-        holder.knowledge.setText(available_characters.get(index).displayKnowledge());
-        holder.portrait.setImageResource(available_characters.get(index).getPortraitID());
+        PlayerCharacter pc = available_characters.get(index);
+
+        holder.character_name.setText(pc.getName());
+        holder.speed.setText(pc.displaySpeed());
+        holder.might.setText(pc.displayMight());
+        holder.sanity.setText(pc.displaySanity());
+        holder.knowledge.setText(pc.displayKnowledge());
+        holder.portrait.setImageResource(pc.getPortraitID());
+        pc.getColor().setBgColor(holder.portrait.getRootView().getRootView());
     }
 
     @Override
