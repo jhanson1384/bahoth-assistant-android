@@ -16,22 +16,22 @@ public enum PlayerColor {
     public void setBgColor(View v){
         switch(this){
             case YELLOW:
-                v.setBackgroundColor(Color.YELLOW);
+                v.setBackgroundResource(R.drawable.yellow_bg);
                 break;
             case PURPLE:
-                v.setBackgroundColor(Color.parseColor("#800080"));
+                v.setBackgroundResource(R.drawable.purple_bg);
                 break;
             case BLUE:
-                v.setBackgroundColor(Color.BLUE);
+                v.setBackgroundResource(R.drawable.blue_bg);
                 break;
             case RED:
-                v.setBackgroundColor(Color.RED);
+                v.setBackgroundResource(R.drawable.red_bg);
                 break;
             case GREEN:
-                v.setBackgroundColor(Color.GREEN);
+                v.setBackgroundResource(R.drawable.green_bg);
                 break;
             case WHITE:
-                v.setBackgroundColor(Color.LTGRAY);
+                v.setBackgroundResource(R.drawable.white_bg);
                 break;
         }
     }
