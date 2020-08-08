@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 
 public class ChooseCharacterActivity extends AppCompatActivity {
+
+    //Request code for launching FilterColorActivity
+    public static final int LAUNCH_FILTER_COLOR = 1;
+
     //Array of all characters, so they don't need to be destroyed/re-initialized when filter changes
     private PlayerCharacter[] all_characters;
     //ArrayList of available characters (can be filtered based on color)
@@ -35,6 +41,13 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         mAdapter = new ChooseCharacterAdapter(available_characters);
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    //Starts FilterColorActivity, which will return selected colors to filter
+    public void filterColorBtnHandler(View v){
+        Intent i = new Intent(this, FilterColorActivity.class);
+        startActivityForResult(i, LAUNCH_FILTER_COLOR);
+    }
+
 
     private void initAllCharacters(){
         //There are 12 total characters

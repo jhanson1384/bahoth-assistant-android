@@ -268,8 +268,6 @@ public class PlayerCharacter {
                 this.fears = "Losing everything he has.";
                 this.portrait_id = R.drawable.longfellow_circle_img;
                 break;
-            default:
-                throw new RuntimeException("Invalid argument to PlayerCharacter Constructor");
         }
     }
 
