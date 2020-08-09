@@ -19,6 +19,7 @@ public enum PlayerColor {
     PlayerColor(int val) { this.value = val; }
 
     public int getValue(){ return value; }
+    public int index(){ return value - 1; }
 
     //Decode PlayerColor from int value (used when sending via Intent)
     public static PlayerColor decodeValue(int val){

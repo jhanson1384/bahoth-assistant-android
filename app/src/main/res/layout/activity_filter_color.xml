@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FilterColorActivity">
+    tools:context=".FilterColorActivity"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/filter_color_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@android:color/white">
+    </androidx.appcompat.widget.Toolbar>
+
+    <CheckBox
+        android:id="@+id/filter_yellow_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yellow"
+        android:textSize="30sp"
+        android:onClick="cbClickedHandler"/>
+    <CheckBox
+        android:id="@+id/filter_purple_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Purple"
+        android:textSize="30sp"
+        android:onClick="cbClickedHandler"/>
+    <CheckBox
+        android:id="@+id/filter_blue_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blue"
+        android:textSize="30sp"
+        android:onClick="cbClickedHandler"/>
+    <CheckBox
+        android:id="@+id/filter_red_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Red"
+        android:textSize="30sp"
+        android:onClick="cbClickedHandler"/>
+    <CheckBox
+        android:id="@+id/filter_green_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Green"
+        android:textSize="30sp"
+        android:onClick="cbClickedHandler"/>
+    <CheckBox
+        android:id="@+id/filter_white_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="White"
+        android:textSize="30sp"
+        android:onClick="cbClickedHandler"/>
+
+</LinearLayout>

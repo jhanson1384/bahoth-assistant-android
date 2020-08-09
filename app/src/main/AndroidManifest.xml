@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FilterColorActivity"></activity>
+        <activity
+            android:name=".FilterColorActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:label="Filter by Color"/>
         <activity
             android:name=".ChooseCharacterActivity"
             android:label="Choose Character" />
