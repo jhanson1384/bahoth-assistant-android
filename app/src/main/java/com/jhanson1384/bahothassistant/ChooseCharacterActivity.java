@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -46,6 +47,56 @@ public class ChooseCharacterActivity extends AppCompatActivity {
     public void filterColorBtnHandler(View v){
         Intent i = new Intent(this, FilterColorActivity.class);
         startActivityForResult(i, LAUNCH_FILTER_COLOR);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode != LAUNCH_FILTER_COLOR) return;
+
+        //resultCode will be RESULT_CANCELED if no filter colors were selected.
+        //If this is the case, the previous filter remains the same, since an empty list isn't intended
+        if (resultCode == Activity.RESULT_OK){
+            int[] filter_list = data.getIntArrayExtra(FilterColorActivity.EXTRA_NAME);
+            applyFilterChange(filter_list);
+        }
+    }
+
+    //Update the list of characters based on list of colors to filter
+    private void applyFilterChange(int[] filter_list){
+        //Update available_characters based on filter colors
+        available_characters.clear();
+        for (int val : filter_list){
+            switch(PlayerColor.decodeValue(val)){
+                case YELLOW:
+                    available_characters.add(all_characters[CharacterEnum.MISSY.getIndex()]);
+                    available_characters.add(all_characters[CharacterEnum.ZOE.getIndex()]);
+                    break;
+                case PURPLE:
+                    available_characters.add(all_characters[CharacterEnum.JENNY.getIndex()]);
+                    available_characters.add(all_characters[CharacterEnum.HEATHER.getIndex()]);
+                    break;
+                case BLUE:
+                    available_characters.add(all_characters[CharacterEnum.ZOSTRA.getIndex()]);
+                    available_characters.add(all_characters[CharacterEnum.VIVIAN.getIndex()]);
+                    break;
+                case RED:
+                    available_characters.add(all_characters[CharacterEnum.DARRIN.getIndex()]);
+                    available_characters.add(all_characters[CharacterEnum.OX.getIndex()]);
+                    break;
+                case GREEN:
+                    available_characters.add(all_characters[CharacterEnum.BRANDON.getIndex()]);
+                    available_characters.add(all_characters[CharacterEnum.PETER.getIndex()]);
+                    break;
+                case WHITE:
+                    available_characters.add(all_characters[CharacterEnum.RHINEHARDT.getIndex()]);
+                    available_characters.add(all_characters[CharacterEnum.LONGFELLOW.getIndex()]);
+                    break;
+            }
+        }
+        //Update the adapter
+        mAdapter.notifyDataSetChanged();
     }
 
 
