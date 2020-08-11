@@ -25,7 +25,7 @@ public enum CharacterEnum {
         return index;
     }
 
-    public CharacterEnum decodeIndex(int ind){
+    public static CharacterEnum decodeIndex(int ind){
         switch(ind){
             case 0:
                 return MISSY;
