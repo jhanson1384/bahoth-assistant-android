@@ -1,5 +1,6 @@
 package com.jhanson1384.bahothassistant;
 
+import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,15 @@ public class ChooseCharacterAdapter
         extends RecyclerView.Adapter<ChooseCharacterAdapter.CharacterOverviewViewHolder>{
 
     private ArrayList<PlayerCharacter> available_characters;
+    private ItemClickListener ic_listener;
+
+    public interface ItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setItemClickListener(ItemClickListener listener){
+        ic_listener = listener;
+    }
 
     public static class CharacterOverviewViewHolder extends RecyclerView.ViewHolder {
         public TextView character_name;
@@ -23,7 +33,7 @@ public class ChooseCharacterAdapter
         public TextView knowledge;
         public ImageView portrait;
 
-        CharacterOverviewViewHolder(View v){
+        CharacterOverviewViewHolder(View v, final ItemClickListener listener){
             super(v);
             character_name = (TextView) v.findViewById(R.id.character_overview_name);
             speed = (TextView) v.findViewById(R.id.character_overview_speed);
@@ -31,6 +41,18 @@ public class ChooseCharacterAdapter
             sanity = (TextView) v.findViewById(R.id.character_overview_sanity);
             knowledge = (TextView) v.findViewById(R.id.character_overview_knowledge);
             portrait = (ImageView) v.findViewById(R.id.character_overview_portrait);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -44,7 +66,7 @@ public class ChooseCharacterAdapter
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.character_overview_item, parent, false);
 
-        CharacterOverviewViewHolder vh = new CharacterOverviewViewHolder(v);
+        CharacterOverviewViewHolder vh = new CharacterOverviewViewHolder(v, ic_listener);
         return vh;
     }
 

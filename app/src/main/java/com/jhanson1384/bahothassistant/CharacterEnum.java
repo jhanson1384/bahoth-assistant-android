@@ -24,4 +24,34 @@ public enum CharacterEnum {
     public int getIndex(){
         return index;
     }
+
+    public CharacterEnum decodeIndex(int ind){
+        switch(ind){
+            case 0:
+                return MISSY;
+            case 1:
+                return ZOE;
+            case 2:
+                return JENNY;
+            case 3:
+                return HEATHER;
+            case 4:
+                return ZOSTRA;
+            case 5:
+                return VIVIAN;
+            case 6:
+                return DARRIN;
+            case 7:
+                return OX;
+            case 8:
+                return BRANDON;
+            case 9:
+                return PETER;
+            case 10:
+                return RHINEHARDT;
+            case 11:
+                return LONGFELLOW;
+        }
+        return MISSY;
+    }
 }

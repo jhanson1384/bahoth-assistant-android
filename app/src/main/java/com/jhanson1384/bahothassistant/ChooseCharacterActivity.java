@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
     private ArrayList<PlayerCharacter> available_characters;
     //RecyclerView for list of characters and associated objects
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ChooseCharacterAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -34,13 +35,8 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         initAllCharacters();
         //Populate available_characters list, initially contains all characters
         initAvailCharacters();
-
         //Setup RecyclerView and associated classes to display characters to choose from
-        mRecyclerView = (RecyclerView) findViewById(R.id.choose_character_recycler_view);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ChooseCharacterAdapter(available_characters);
-        mRecyclerView.setAdapter(mAdapter);
+        initRecyclerView();
     }
 
     //Starts FilterColorActivity, which will return selected colors to filter
@@ -123,5 +119,21 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         for (PlayerCharacter pc : all_characters){
             available_characters.add(pc);
         }
+    }
+
+    private void initRecyclerView(){
+        mRecyclerView = (RecyclerView) findViewById(R.id.choose_character_recycler_view);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new ChooseCharacterAdapter(available_characters);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setItemClickListener(new ChooseCharacterAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String pc = available_characters.get(position).getName();
+                Toast.makeText(ChooseCharacterActivity.this, pc, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
