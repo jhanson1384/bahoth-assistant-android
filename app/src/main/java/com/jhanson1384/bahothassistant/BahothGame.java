@@ -8,8 +8,8 @@ public class BahothGame {
     //Accessor methods
     public PlayerCharacter getPC(){ return character; }
 
-    public BahothGame(CharacterEnum ce){
-        this.character = new PlayerCharacter(ce);
+    public BahothGame(CharacterEnum char_type){
+        this.character = new PlayerCharacter(char_type);
         this.n_omens = 0;
     }
 }

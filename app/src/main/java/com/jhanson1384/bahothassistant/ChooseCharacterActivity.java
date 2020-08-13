@@ -17,6 +17,10 @@ public class ChooseCharacterActivity extends AppCompatActivity {
     //Request code for launching FilterColorActivity
     public static final int LAUNCH_FILTER_COLOR = 1;
 
+    //Name for the Extra that is sent when GameActivity is started
+    //Specifies the character type chosen for the game
+    public static final String EXTRA_CHAR_TYPE = "com.jhanson1384.bahothassistant.CHAR_TYPE";
+
     //Array of all characters, so they don't need to be destroyed/re-initialized when filter changes
     private PlayerCharacter[] all_characters;
     //ArrayList of available characters (can be filtered based on color)
@@ -131,8 +135,10 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         mAdapter.setItemClickListener(new ChooseCharacterAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String pc = available_characters.get(position).getName();
-                Toast.makeText(ChooseCharacterActivity.this, pc, Toast.LENGTH_SHORT).show();
+                //Start GameActivity for the character type that was clicked on
+                Intent i = new Intent(ChooseCharacterActivity.this, GameActivity.class);
+                i.putExtra(EXTRA_CHAR_TYPE, available_characters.get(position).getCharType().getIndex());
+                startActivity(i);
             }
         });
     }
