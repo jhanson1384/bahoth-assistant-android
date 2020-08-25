@@ -308,7 +308,16 @@ public class PlayerCharacter implements Serializable {
         return knowledge_scale[knowledge_ind];
     }
 
-    //Returns formatted strings for displaying character stats
+    //Returns formatted strings for displaying character info
+    public String displayAge() { return "Age: " + Integer.toString(age); }
+    public String displayHeight() {
+        return "Height: " + Integer.toString(height_ft) + "' " + Integer.toString(height_in) + "\"";
+    }
+    public String displayWeight() { return "Weight: " + Integer.toString(weight) + " lbs"; }
+    public String displayHobbies() { return "Hobbies: TODO"; }
+    public String displayBirthday() { return "Birthday: TODO"; }
+    public String displayDescription() { return "Description: " + brief_desc; }
+    public String displayFears() { return "Fears: " + fears; }
     public String displaySpeed(){
         return "Speed: " + Integer.toString(this.getSpeed());
     }
