@@ -1,6 +1,10 @@
 package com.jhanson1384.bahothassistant;
 
-public class PlayerCharacter {
+import java.io.Serializable;
+
+//If PlayerCharacter is serialized often, Parcelable should be implemented instead of Serializable
+//Currently only passed once when DisplayCharacterFragment is created, so Serializable is OK
+public class PlayerCharacter implements Serializable {
     //CONSTRUCTOR
     public PlayerCharacter(CharacterEnum character){
         this.character_type = character;
