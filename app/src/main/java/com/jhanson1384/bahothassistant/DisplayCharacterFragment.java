@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,10 @@ public class DisplayCharacterFragment extends Fragment {
     private TextView birthday;
     private TextView description;
     private TextView fears;
+    private LinearLayout speed_scale;
+    private LinearLayout might_scale;
+    private LinearLayout sanity_scale;
+    private LinearLayout knowledge_scale;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,10 @@ public class DisplayCharacterFragment extends Fragment {
         birthday = (TextView) v.findViewById(R.id.display_character_birthday);
         description = (TextView) v.findViewById(R.id.display_character_description);
         fears = (TextView) v.findViewById(R.id.display_character_fears);
+        speed_scale = (LinearLayout) v.findViewById(R.id.speed_scale_frame);
+        might_scale = (LinearLayout) v.findViewById(R.id.might_scale_frame);
+        sanity_scale = (LinearLayout) v.findViewById(R.id.sanity_scale_frame);
+        knowledge_scale = (LinearLayout) v.findViewById(R.id.knowledge_scale_frame);
 
         //Initialize view contents
         updateViewContents();
@@ -78,5 +87,9 @@ public class DisplayCharacterFragment extends Fragment {
         
         //Set background color
         character.getColor().setBgColor(name.getRootView());
+        character.getColor().setBgColorBorder(speed_scale);
+        character.getColor().setBgColorBorder(might_scale);
+        character.getColor().setBgColorBorder(sanity_scale);
+        character.getColor().setBgColorBorder(knowledge_scale);
     }
 }

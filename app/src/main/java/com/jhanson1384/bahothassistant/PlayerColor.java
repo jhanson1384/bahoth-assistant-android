@@ -63,4 +63,27 @@ public enum PlayerColor {
                 break;
         }
     }
+
+    public void setBgColorBorder(View v){
+        switch(this){
+            case YELLOW:
+                v.setBackgroundResource(R.drawable.yellow_bg_border);
+                break;
+            case PURPLE:
+                v.setBackgroundResource(R.drawable.purple_bg_border);
+                break;
+            case BLUE:
+                v.setBackgroundResource(R.drawable.blue_bg_border);
+                break;
+            case RED:
+                v.setBackgroundResource(R.drawable.red_bg_border);
+                break;
+            case GREEN:
+                v.setBackgroundResource(R.drawable.green_bg_border);
+                break;
+            case WHITE:
+                v.setBackgroundResource(R.drawable.white_bg_border);
+                break;
+        }
+    }
 }
