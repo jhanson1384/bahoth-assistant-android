@@ -27,6 +27,11 @@ public class DisplayCharacterFragment extends Fragment {
     private TextView birthday;
     private TextView description;
     private TextView fears;
+    private TextView[] speed_values = new TextView[8];
+    private TextView[] might_values = new TextView[8];
+    private TextView[] sanity_values = new TextView[8];
+    private TextView[] knowledge_values = new TextView[8];
+    //Parent layouts for stat value arrays
     private LinearLayout speed_scale;
     private LinearLayout might_scale;
     private LinearLayout sanity_scale;
@@ -69,6 +74,10 @@ public class DisplayCharacterFragment extends Fragment {
         might_scale = (LinearLayout) v.findViewById(R.id.might_scale_frame);
         sanity_scale = (LinearLayout) v.findViewById(R.id.sanity_scale_frame);
         knowledge_scale = (LinearLayout) v.findViewById(R.id.knowledge_scale_frame);
+        initStatViews(speed_values, speed_scale, character.getSpeedScale());
+        initStatViews(might_values, might_scale, character.getMightScale());
+        initStatViews(sanity_values, sanity_scale, character.getSanityScale());
+        initStatViews(knowledge_values, knowledge_scale, character.getKnowledgeScale());
 
         //Initialize view contents
         updateViewContents();
@@ -91,5 +100,18 @@ public class DisplayCharacterFragment extends Fragment {
         character.getColor().setBgColorBorder(might_scale);
         character.getColor().setBgColorBorder(sanity_scale);
         character.getColor().setBgColorBorder(knowledge_scale);
+    }
+
+    private void initStatViews(TextView[] views, LinearLayout layout, int[] data){
+        TextView tv;
+        for (int i=0; i<views.length; ++i){
+            tv = views[i];
+            tv = new TextView(getContext());
+            tv.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            layout.addView(tv);
+            tv.setText(Integer.toString(data[i]));
+        }
     }
 }
