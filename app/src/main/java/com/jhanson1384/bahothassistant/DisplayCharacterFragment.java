@@ -1,7 +1,9 @@
 package com.jhanson1384.bahothassistant;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -107,11 +109,18 @@ public class DisplayCharacterFragment extends Fragment {
         for (int i=0; i<views.length; ++i){
             tv = views[i];
             tv = new TextView(getContext());
-            tv.setLayoutParams(new LinearLayout.LayoutParams(
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            layout.addView(tv);
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(20, 0, 20, 0);
+            tv.setLayoutParams(params);
+
             tv.setText(Integer.toString(data[i]));
+            tv.setTextColor(Color.parseColor("#1E1E1E"));
+            tv.setTypeface(ResourcesCompat.getFont(getContext(), R.font.abril_fatface));
+
+            layout.addView(tv);
         }
     }
 }
