@@ -86,4 +86,8 @@ public enum PlayerColor {
                 break;
         }
     }
+
+    public void setBgColorHighlight(View v){
+        v.setBackgroundResource(R.drawable.white_bg_highlight);
+    }
 }

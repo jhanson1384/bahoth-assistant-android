@@ -76,10 +76,10 @@ public class DisplayCharacterFragment extends Fragment {
         might_scale = (LinearLayout) v.findViewById(R.id.might_scale_frame);
         sanity_scale = (LinearLayout) v.findViewById(R.id.sanity_scale_frame);
         knowledge_scale = (LinearLayout) v.findViewById(R.id.knowledge_scale_frame);
-        initStatViews(speed_values, speed_scale, character.getSpeedScale());
-        initStatViews(might_values, might_scale, character.getMightScale());
-        initStatViews(sanity_values, sanity_scale, character.getSanityScale());
-        initStatViews(knowledge_values, knowledge_scale, character.getKnowledgeScale());
+        initStatViews(speed_values, speed_scale, character.getSpeedScale(), character.getSpeedInd());
+        initStatViews(might_values, might_scale, character.getMightScale(), character.getMightInd());
+        initStatViews(sanity_values, sanity_scale, character.getSanityScale(), character.getSanityInd());
+        initStatViews(knowledge_values, knowledge_scale, character.getKnowledgeScale(), character.getKnowledgeInd());
 
         //Initialize view contents
         updateViewContents();
@@ -104,7 +104,7 @@ public class DisplayCharacterFragment extends Fragment {
         character.getColor().setBgColorBorder(knowledge_scale);
     }
 
-    private void initStatViews(TextView[] views, LinearLayout layout, int[] data){
+    private void initStatViews(TextView[] views, LinearLayout layout, int[] data, int ind){
         TextView tv;
         for (int i=0; i<views.length; ++i){
             tv = views[i];
@@ -117,8 +117,14 @@ public class DisplayCharacterFragment extends Fragment {
             tv.setLayoutParams(params);
 
             tv.setText(Integer.toString(data[i]));
-            tv.setTextColor(Color.parseColor("#1E1E1E"));
             tv.setTypeface(ResourcesCompat.getFont(getContext(), R.font.abril_fatface));
+            //Highlight the TextView for the current stat value
+            if (i == ind){
+                character.getColor().setBgColorHighlight(tv);
+                tv.setTextColor(Color.parseColor("#FFFFFF"));
+            } else {
+                tv.setTextColor(Color.parseColor("#1E1E1E"));
+            }
 
             layout.addView(tv);
         }

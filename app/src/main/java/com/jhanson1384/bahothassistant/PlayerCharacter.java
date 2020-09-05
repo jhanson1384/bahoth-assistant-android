@@ -282,6 +282,10 @@ public class PlayerCharacter implements Serializable {
     public CharacterEnum getCharType() { return this.character_type; }
     public int getPortraitID() { return this.portrait_id; }
     public PlayerColor getColor() { return this.color; }
+    public int getSpeedInd() { return this.speed_ind; }
+    public int getMightInd() { return this.might_ind; }
+    public int getSanityInd() { return this.sanity_ind; }
+    public int getKnowledgeInd() { return this.knowledge_ind; }
     public int[] getSpeedScale() { return this.speed_scale; }
     public int[] getMightScale() { return this.might_scale; }
     public int[] getSanityScale() { return this.sanity_scale; }
