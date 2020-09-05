@@ -15,6 +15,94 @@
         android:textColor="#1E1E1E"
         android:textSize="17dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abril_fatface"
+            android:text="Speed"
+            android:textColor="#1E1E1E"
+            android:textSize="17dp"/>
+
+        <LinearLayout
+            android:id="@+id/speed_scale_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abril_fatface"
+            android:text="Might"
+            android:textColor="#1E1E1E"
+            android:textSize="17dp"/>
+
+        <LinearLayout
+            android:id="@+id/might_scale_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abril_fatface"
+            android:text="Sanity"
+            android:textColor="#1E1E1E"
+            android:textSize="17dp"/>
+
+        <LinearLayout
+            android:id="@+id/sanity_scale_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abril_fatface"
+            android:text="Knowledge"
+            android:textColor="#1E1E1E"
+            android:textSize="17dp"/>
+
+        <LinearLayout
+            android:id="@+id/knowledge_scale_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        </LinearLayout>
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/display_character_portrait"
         android:layout_width="wrap_content"
