@@ -323,7 +323,6 @@ public class PlayerCharacter implements Serializable {
     }
     public String displayWeight() { return "Weight: " + Integer.toString(weight) + " lbs"; }
     public String displayHobbies() { return "Hobbies: TODO"; }
-    public String displayBirthday() { return "Birthday: TODO"; }
     public String displayDescription() { return "Description: " + brief_desc; }
     public String displayFears() { return "Fears: " + fears; }
     public String displaySpeed(){
@@ -336,6 +335,69 @@ public class PlayerCharacter implements Serializable {
         return "Sanity: " + Integer.toString(this.getSanity());
     }
     public String displayKnowledge(){ return "Knowledge: " + Integer.toString(this.getKnowledge()); }
+    public String displayBirthday() {
+        String month_str;
+        String day_str;
+
+        switch (birth_month){
+            case 1:
+                month_str = "January";
+                break;
+            case 2:
+                month_str = "February";
+                break;
+            case 3:
+                month_str = "March";
+                break;
+            case 4:
+                month_str = "April";
+                break;
+            case 5:
+                month_str = "May";
+                break;
+            case 6:
+                month_str = "June";
+                break;
+            case 7:
+                month_str = "July";
+                break;
+            case 8:
+                month_str = "August";
+                break;
+            case 9:
+                month_str = "September";
+                break;
+            case 10:
+                month_str = "October";
+                break;
+            case 11:
+                month_str = "November";
+                break;
+            case 12:
+                month_str = "December";
+                break;
+            default:
+                month_str = "ERROR";
+                break;
+        }
+
+        switch (birth_day){
+            case 1:
+                day_str = "1st";
+                break;
+            case 2:
+                day_str = "2nd";
+                break;
+            case 3:
+                day_str = "3rd";
+                break;
+            default:
+                day_str = Integer.toString(birth_day) + "th";
+                break;
+        }
+
+        return "Birthday: " + month_str + " " + day_str;
+    }
 
 
 
