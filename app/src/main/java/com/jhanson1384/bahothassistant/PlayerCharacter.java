@@ -323,7 +323,7 @@ public class PlayerCharacter implements Serializable {
     }
     public String displayWeight() { return "Weight: " + Integer.toString(weight) + " lbs"; }
     public String displayHobbies() { return "Hobbies: " + hobbies; }
-    public String displayDescription() { return "Description: " + brief_desc; }
+    public String displayDescription() { return brief_desc; }
     public String displayFears() { return "Fears: " + fears; }
     public String displaySpeed(){
         return "Speed: " + Integer.toString(this.getSpeed());
