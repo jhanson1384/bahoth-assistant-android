@@ -24,7 +24,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 4;
                 this.height_in = 2;
                 this.weight = 62;
-                this.hobbies = new String[] {"Swimming", "Medicine"};
+                this.hobbies = "Swimming, Medicine";
                 this.birth_month = 2;
                 this.birth_day = 14;
                 this.brief_desc = "A creepy little girl, who wants to be a doctor. She cuts up dead things, for fun. Missy then has nightmares about them.";
@@ -46,7 +46,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 3;
                 this.height_in = 9;
                 this.weight = 49;
-                this.hobbies = new String[] {"Dolls", "Music"};
+                this.hobbies = "Dolls, Music";
                 this.birth_month = 11;
                 this.birth_day = 5;
                 this.brief_desc = "Zoe has an implied tragic story. Raised in an unhappy home, she uses dolls to express her emotions.";
@@ -68,7 +68,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 7;
                 this.weight = 142;
-                this.hobbies = new String[] {"Reading", "Soccer"};
+                this.hobbies = "Reading, Soccer";
                 this.birth_month = 3;
                 this.birth_day = 4;
                 this.brief_desc = "A quiet bookworm whose mother disappeared when she was younger. Jenny feels always alone.";
@@ -90,7 +90,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 2;
                 this.weight = 120;
-                this.hobbies = new String[] {"Television", "Shopping"};
+                this.hobbies = "Television, Shopping";
                 this.birth_month = 8;
                 this.birth_day = 2;
                 this.brief_desc = "Seen as perfect in both her eyes and the eyes of others, when things aren’t perfect she suffers from headaches. She keeps smiling anyway.";
@@ -112,7 +112,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 0;
                 this.weight = 150;
-                this.hobbies = new String[] {"Astrology", "Cooking", "Baseball"};
+                this.hobbies = "Astrology, Cooking, Baseball";
                 this.birth_month = 12;
                 this.birth_day = 10;
                 this.brief_desc = "Also known as Belladina, Madame Zostra is a tarot card reader and tea-leaf reader with her own stay-at-home astrology business.";
@@ -134,7 +134,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 5;
                 this.weight = 142;
-                this.hobbies = new String[] {"Old Movies", "Horses"};
+                this.hobbies = "Old Movies, Horses";
                 this.birth_month = 1;
                 this.birth_day = 11;
                 this.brief_desc = "A small bookshop owner who, when finances become difficult, has thoughts of arson.";
@@ -156,7 +156,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 11;
                 this.weight = 188;
-                this.hobbies = new String[] {"Track", "Music", "Shakespearean Literature"};
+                this.hobbies = "Track, Music, Shakespearean Literature";
                 this.birth_month = 6;
                 this.birth_day = 6;
                 this.brief_desc = "Flash is a paranoid runner, who can’t help but shake the feeling that something is chasing him.";
@@ -178,7 +178,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 6;
                 this.height_in = 4;
                 this.weight = 288;
-                this.hobbies = new String[] {"Football", "Shiny Objects"};
+                this.hobbies = "Football, Shiny Objects";
                 this.birth_month = 10;
                 this.birth_day = 18;
                 this.brief_desc = "A big kid who once had to lash out. Ox is now haunted by his past and what he did that one time.";
@@ -200,7 +200,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 1;
                 this.weight = 109;
-                this.hobbies = new String[] {"Computers", "Camping", "Hockey"};
+                this.hobbies = "Computers, Camping, Hockey";
                 this.birth_month = 5;
                 this.birth_day = 12;
                 this.brief_desc = "A kid who never liked playing with traditional toys, Brandon could swear his old puppet was moving closer to him when he slept.";
@@ -222,7 +222,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 4;
                 this.height_in = 11;
                 this.weight = 98;
-                this.hobbies = new String[] {"Bugs", "Basketball"};
+                this.hobbies = "Bugs, Basketball";
                 this.birth_month = 9;
                 this.birth_day = 3;
                 this.brief_desc = "Seriously bullied by his family, Peter liked to hide under his house and look at bugs. He wants to be an entomologist.";
@@ -244,7 +244,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 9;
                 this.weight = 185;
-                this.hobbies = new String[] {"Fencing", "Gardening"};
+                this.hobbies = "Fencing, Gardening";
                 this.birth_month = 4;
                 this.birth_day = 29;
                 this.brief_desc = "A man who turned to religion to escape persecution, Father Rhinehardt is haunted by the mad whispers of the confessional booth.";
@@ -266,7 +266,7 @@ public class PlayerCharacter implements Serializable {
                 this.height_ft = 5;
                 this.height_in = 11;
                 this.weight = 153;
-                this.hobbies = new String[] {"Gaelic Music", "Drama", "Fine Wines"};
+                this.hobbies = "Gaelic Music, Drama, Fine Wines";
                 this.birth_month = 7;
                 this.birth_day = 27;
                 this.brief_desc = "An aristocrat by birth, Professor Longfellow now lives with his mother, broke and wondering about her life insurance policy.";
@@ -322,9 +322,8 @@ public class PlayerCharacter implements Serializable {
         return "Height: " + Integer.toString(height_ft) + "' " + Integer.toString(height_in) + "\"";
     }
     public String displayWeight() { return "Weight: " + Integer.toString(weight) + " lbs"; }
-    public String displayHobbies() { return "Hobbies: TODO"; }
-    public String displayBirthday() { return "Birthday: TODO"; }
-    public String displayDescription() { return "Description: " + brief_desc; }
+    public String displayHobbies() { return "Hobbies: " + hobbies; }
+    public String displayDescription() { return brief_desc; }
     public String displayFears() { return "Fears: " + fears; }
     public String displaySpeed(){
         return "Speed: " + Integer.toString(this.getSpeed());
@@ -336,6 +335,69 @@ public class PlayerCharacter implements Serializable {
         return "Sanity: " + Integer.toString(this.getSanity());
     }
     public String displayKnowledge(){ return "Knowledge: " + Integer.toString(this.getKnowledge()); }
+    public String displayBirthday() {
+        String month_str;
+        String day_str;
+
+        switch (birth_month){
+            case 1:
+                month_str = "January";
+                break;
+            case 2:
+                month_str = "February";
+                break;
+            case 3:
+                month_str = "March";
+                break;
+            case 4:
+                month_str = "April";
+                break;
+            case 5:
+                month_str = "May";
+                break;
+            case 6:
+                month_str = "June";
+                break;
+            case 7:
+                month_str = "July";
+                break;
+            case 8:
+                month_str = "August";
+                break;
+            case 9:
+                month_str = "September";
+                break;
+            case 10:
+                month_str = "October";
+                break;
+            case 11:
+                month_str = "November";
+                break;
+            case 12:
+                month_str = "December";
+                break;
+            default:
+                month_str = "ERROR";
+                break;
+        }
+
+        switch (birth_day){
+            case 1:
+                day_str = "1st";
+                break;
+            case 2:
+                day_str = "2nd";
+                break;
+            case 3:
+                day_str = "3rd";
+                break;
+            default:
+                day_str = Integer.toString(birth_day) + "th";
+                break;
+        }
+
+        return "Birthday: " + month_str + " " + day_str;
+    }
 
 
 
@@ -362,7 +424,7 @@ public class PlayerCharacter implements Serializable {
     //Character weight (in pounds)
     private int weight;
     //List of character hobbies
-    private String[] hobbies;
+    private String hobbies;
     //Character birthday (broken into month and day)
     private int birth_month;
     private int birth_day;
