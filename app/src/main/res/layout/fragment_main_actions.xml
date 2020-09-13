@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActionsFragment">
+    tools:context=".MainActionsFragment"
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Main Actions Fragment"
-        android:background="@drawable/white_bg"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-</FrameLayout>
+
+        <Button
+            android:id="@+id/dice_roll_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Dice Roll" />
+
+        <Button
+            android:id="@+id/adjust_stats_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Adjust Stats" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <Button
+            android:id="@+id/omen_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Increment Omen Count" />
+    </LinearLayout>
+
+</LinearLayout>
