@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiceRollMenuFragment">
+    tools:context=".DiceRollMenuFragment"
+    android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/n_roll_menu_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Dice Roll Menu Fragment"
-        android:background="@drawable/white_bg"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="N-Roll" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/haunt_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Haunt Roll" />
+
+    <Button
+        android:id="@+id/stat_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Stat Roll" />
+
+    <Button
+        android:id="@+id/attack_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Attack Roll" />
+</LinearLayout>
