@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DiceRollMenuFragment"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/n_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="N-Roll" />
+
+    <Button
+        android:id="@+id/haunt_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Haunt Roll" />
+
+    <Button
+        android:id="@+id/stat_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Stat Roll" />
+
+    <Button
+        android:id="@+id/attack_roll_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Attack Roll" />
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.jhanson1384.bahothassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -30,6 +31,12 @@ public class GameActivity extends AppCompatActivity {
         //Setup initial layout
         initDisplayCharFragment();
         initConfirmCharFragment();
+    }
+
+    public void clearFragments(){
+        for (Fragment frag : frag_manager.getFragments()){
+            frag_manager.beginTransaction().remove(frag).commit();
+        }
     }
 
     //Initialize the DisplayCharacterFragment
