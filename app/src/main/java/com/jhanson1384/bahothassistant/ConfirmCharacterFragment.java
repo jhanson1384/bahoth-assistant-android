@@ -3,6 +3,8 @@ package com.jhanson1384.bahothassistant;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,14 +28,19 @@ public class ConfirmCharacterFragment extends Fragment {
         //Set onClick behavior for Confirm Character button
         Button btn = (Button) v.findViewById(R.id.confirm_character_btn);
         btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Button clicked", Toast.LENGTH_LONG).show();
-            }
+            @Override public void onClick(View view) { confirmCharBtnHandler(); }
         });
 
         return v;
     }
 
-    
+    public void confirmCharBtnHandler(){
+        //Get FragmentManager from parent activity
+        FragmentManager frag_manager = ((GameActivity) getActivity()).getFragManager();
+
+        //Remove this fragment
+        FragmentTransaction transaction = frag_manager.beginTransaction();
+        transaction.remove(this);
+        transaction.commit();
+    }
 }
