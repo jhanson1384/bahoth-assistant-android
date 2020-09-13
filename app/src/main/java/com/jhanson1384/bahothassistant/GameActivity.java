@@ -12,6 +12,8 @@ public class GameActivity extends AppCompatActivity {
     private FragmentManager frag_manager;
     private BahothGame game;
 
+    public FragmentManager getFragManager(){ return frag_manager; }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +27,9 @@ public class GameActivity extends AppCompatActivity {
 
         //Init fragment manager
         frag_manager = getSupportFragmentManager();
-        //Setup initial character display layout
+        //Setup initial layout
         initDisplayCharFragment();
+        initConfirmCharFragment();
     }
 
     //Initialize the DisplayCharacterFragment
@@ -42,6 +45,17 @@ public class GameActivity extends AppCompatActivity {
 
         //Add fragment to layout
         transaction.add(R.id.game_activity, disp_char_frag);
+        transaction.commit();
+    }
+
+    //Initialize the ConfirmCharacterFragment
+    private void initConfirmCharFragment() {
+        //Create Fragment
+        FragmentTransaction transaction = frag_manager.beginTransaction();
+        ConfirmCharacterFragment confirm_char_frag = new ConfirmCharacterFragment();
+
+        //Add fragment to layout
+        transaction.add(R.id.game_activity, confirm_char_frag);
         transaction.commit();
     }
 }
