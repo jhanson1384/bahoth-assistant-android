@@ -41,6 +41,10 @@ public class ConfirmCharacterFragment extends Fragment {
         //Remove this fragment
         FragmentTransaction transaction = frag_manager.beginTransaction();
         transaction.remove(this);
+        //Replace with MainActionsFragment
+        MainActionsFragment main_actions = new MainActionsFragment();
+        transaction.add(R.id.game_activity, main_actions);
+
         transaction.commit();
     }
 }
