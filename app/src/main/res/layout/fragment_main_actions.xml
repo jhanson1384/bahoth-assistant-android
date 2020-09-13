@@ -37,7 +37,7 @@
             android:id="@+id/omen_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Increment Omen Count" />
+            android:text="Omen Count Placeholder" />
     </LinearLayout>
 
 </LinearLayout>
