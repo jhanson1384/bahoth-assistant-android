@@ -3,6 +3,7 @@ package com.jhanson1384.bahothassistant;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,10 +59,22 @@ public class DiceRollMenuFragment extends Fragment {
     }
 
     public void statRollBtnHandler(){
-        Toast.makeText(getContext(), "Stat Roll Button", Toast.LENGTH_SHORT).show();
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Add ChooseRollStatFragment to parent activity
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        ChooseRollStatFragment choose_roll_stat = new ChooseRollStatFragment();
+        transaction.add(R.id.game_activity, choose_roll_stat).commit();
     }
 
     public void attackRollBtnHandler(){
-        Toast.makeText(getContext(), "Attack Roll Button", Toast.LENGTH_SHORT).show();
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Add ChooseRollStatFragment to parent activity
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        ChooseRollStatFragment choose_roll_stat = new ChooseRollStatFragment();
+        transaction.add(R.id.game_activity, choose_roll_stat).commit();
     }
 }
