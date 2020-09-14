@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChooseRollStatFragment">
+    tools:context=".ChooseRollStatFragment"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/speed_stat_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Speed" />
+
+    <Button
+        android:id="@+id/might_stat_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Might" />
+
+
+    <Button
+        android:id="@+id/sanity_stat_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Sanity" />
+
+    <Button
+        android:id="@+id/knowledge_stat_menu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Knowledge" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="choose roll stat fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stat Modifier:"
         android:background="@drawable/white_bg"/>
 
-</FrameLayout>
+</LinearLayout>
