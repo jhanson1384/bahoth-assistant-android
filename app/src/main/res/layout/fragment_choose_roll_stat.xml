@@ -3,34 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiceRollMenuFragment"
+    tools:context=".ChooseRollStatFragment"
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/n_roll_menu_btn"
+        android:id="@+id/speed_stat_menu_btn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="N-Roll" />
+        android:text="Speed" />
 
     <Button
-        android:id="@+id/haunt_roll_menu_btn"
+        android:id="@+id/might_stat_menu_btn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Haunt Roll" />
+        android:text="Might" />
+
 
     <Button
-        android:id="@+id/stat_roll_menu_btn"
+        android:id="@+id/sanity_stat_menu_btn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Stat Roll" />
+        android:text="Sanity" />
 
     <Button
-        android:id="@+id/damage_roll_menu_btn"
+        android:id="@+id/knowledge_stat_menu_btn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Damage Roll" />
+        android:text="Knowledge" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stat Modifier:"
+        android:background="@drawable/white_bg"/>
+
 </LinearLayout>
