@@ -8,7 +8,10 @@ public class BahothGame {
     //Accessor methods
     public PlayerCharacter getPC(){ return character; }
     public String displayOmenCounter(){ return "Omen Counter: " + n_omens; }
-    public void adjustOmenCounter(int diff){ n_omens += diff; }
+    public void adjustOmenCounter(int diff){
+        n_omens += diff;
+        if (n_omens < 0) n_omens = 0;
+    }
 
     public BahothGame(CharacterEnum char_type){
         this.character = new PlayerCharacter(char_type);
