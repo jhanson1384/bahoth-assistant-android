@@ -33,11 +33,26 @@
         android:layout_weight="1">
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:text="Omen Count" />
+
         <Button
-            android:id="@+id/omen_btn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Omen Count Placeholder" />
+            android:id="@+id/increment_omen_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/decrement_omen_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-" />
     </LinearLayout>
 
 </LinearLayout>
