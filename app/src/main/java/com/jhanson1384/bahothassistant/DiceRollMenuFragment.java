@@ -51,7 +51,13 @@ public class DiceRollMenuFragment extends Fragment {
     }
 
     public void nRollBtnHandler(){
-        Toast.makeText(getContext(), "n-roll Button", Toast.LENGTH_SHORT).show();
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Add NDiceRollFragment to parent activity
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        NDiceRollFragment n_dice_roll = new NDiceRollFragment();
+        transaction.add(R.id.game_activity, n_dice_roll).commit();
     }
 
     public void hauntRollBtnHandler(){
