@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActionsFragment extends Fragment {
@@ -34,6 +35,10 @@ public class MainActionsFragment extends Fragment {
         adjust_stats_btn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) { adjustStatsBtnHandler(); }
         });
+
+        //Initialize Omen Counter label
+        TextView omen_counter_label = (TextView) v.findViewById(R.id.omen_counter_label);
+        omen_counter_label.setText(((GameActivity) getActivity()).getGame().displayOmenCounter());
 
         return v;
     }
