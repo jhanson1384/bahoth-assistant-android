@@ -10,6 +10,7 @@ public class BahothGame {
     public String displayOmenCounter(){ return "Omen Counter: " + n_omens; }
     public void adjustOmenCounter(int diff){
         n_omens += diff;
+        //Ensure omen counter isn't a negative number
         if (n_omens < 0) n_omens = 0;
     }
 
