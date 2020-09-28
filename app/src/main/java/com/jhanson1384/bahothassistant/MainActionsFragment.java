@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActionsFragment extends Fragment {
@@ -35,6 +36,25 @@ public class MainActionsFragment extends Fragment {
             @Override public void onClick(View view) { adjustStatsBtnHandler(); }
         });
 
+        //Initialize Omen Counter label
+        updateOmenCounter(v);
+
+        //Set onClick listeners for increment/decrement omen counter buttons
+        Button incr_omen_count_btn = (Button) v.findViewById(R.id.increment_omen_btn);
+        Button decr_omen_count_btn = (Button) v.findViewById(R.id.decrement_omen_btn);
+        incr_omen_count_btn.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View view){
+                ((GameActivity) getActivity()).getGame().adjustOmenCounter(1);
+                updateOmenCounter(null);
+            }
+        });
+        decr_omen_count_btn.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View view){
+                ((GameActivity) getActivity()).getGame().adjustOmenCounter(-1);
+                updateOmenCounter(null);
+            }
+        });
+
         return v;
     }
 
@@ -50,5 +70,11 @@ public class MainActionsFragment extends Fragment {
 
     public void adjustStatsBtnHandler(){
         Toast.makeText(getContext(), "Adjust Stats Button", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateOmenCounter(View view){
+        View v = (view == null) ? getView() : view;
+        TextView omen_counter_label = (TextView) v.findViewById(R.id.omen_counter_label);
+        omen_counter_label.setText(((GameActivity) getActivity()).getGame().displayOmenCounter());
     }
 }

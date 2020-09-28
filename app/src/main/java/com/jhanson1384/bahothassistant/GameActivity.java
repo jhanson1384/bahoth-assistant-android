@@ -14,6 +14,7 @@ public class GameActivity extends AppCompatActivity {
     private BahothGame game;
 
     public FragmentManager getFragManager(){ return frag_manager; }
+    public BahothGame getGame(){ return game; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
