@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.android.flexbox.FlexboxLayout;
+
 public class DiceRollFragment extends Fragment {
     private DiceManager diceManager;
 
@@ -57,7 +59,7 @@ public class DiceRollFragment extends Fragment {
     public void rollDice(){
         diceManager.roll();
 
-        LinearLayout dice_board = (LinearLayout) getActivity().findViewById(R.id.dice_board);
+        FlexboxLayout dice_board = (FlexboxLayout) getActivity().findViewById(R.id.dice_board);
         for (int i=0; i<diceManager.getNDice(); ++i){
             ImageView die_img = new ImageView(getContext());
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
