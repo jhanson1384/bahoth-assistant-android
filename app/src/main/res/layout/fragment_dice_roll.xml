@@ -9,7 +9,14 @@
     <LinearLayout
         android:id="@+id/dice_board"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/roll_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll" />
 
 </LinearLayout>

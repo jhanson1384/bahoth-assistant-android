@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class DiceRollFragment extends Fragment {
     private DiceManager diceManager;
@@ -23,7 +26,13 @@ public class DiceRollFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_dice_roll, container, false);
 
         //Init dice manager
-        diceManager = new DiceManager(8);
+        initDiceManager();
+
+        //Set OnClickListener for dice roll button
+        Button roll_btn = (Button) v.findViewById(R.id.roll_btn);
+        roll_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { rollDice(); }
+        });
 
         return v;
     }
@@ -39,5 +48,20 @@ public class DiceRollFragment extends Fragment {
                 return R.drawable.two_die;
         }
         return R.drawable.zero_die;
+    }
+
+    private void initDiceManager(){
+        diceManager = new DiceManager(8);
+    }
+
+    public void rollDice(){
+        diceManager.roll();
+
+        LinearLayout dice_board = (LinearLayout) getActivity().findViewById(R.id.dice_board);
+        for (int i=0; i<diceManager.getNDice(); ++i){
+            ImageView die_img = new ImageView(getContext());
+            die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
+            dice_board.addView(die_img);
+        }
     }
 }

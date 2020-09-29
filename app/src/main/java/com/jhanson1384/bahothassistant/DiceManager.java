@@ -4,6 +4,9 @@ public class DiceManager {
     private int[] dice;
     private int n_dice;
 
+    public int getNDice(){ return n_dice; }
+    public int getDieVal(int ind){ return dice[ind]; }
+
     public DiceManager(int n_dice){
         dice = new int[8];
         for (int i=0; i<dice.length; i++){ dice[i] = 0; }
