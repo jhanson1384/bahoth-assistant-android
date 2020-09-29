@@ -59,7 +59,10 @@ public class DiceRollFragment extends Fragment {
     public void rollDice(){
         diceManager.roll();
 
+        //Clear existing dice from board
         FlexboxLayout dice_board = (FlexboxLayout) getActivity().findViewById(R.id.dice_board);
+        dice_board.removeAllViews();
+        //Add new dice to board
         for (int i=0; i<diceManager.getNDice(); ++i){
             ImageView die_img = new ImageView(getContext());
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
