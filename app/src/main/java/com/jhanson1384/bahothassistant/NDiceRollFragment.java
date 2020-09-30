@@ -17,6 +17,12 @@ public class NDiceRollFragment extends DiceRollFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        ViewGroup v = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
+
+        //Add View to allow user to modify number of die being rolled
+        View choose_n_dice_container = inflater.inflate(R.layout.choose_n_dice, v, false);
+        v.addView(choose_n_dice_container, 0);
+
+        return v;
     }
 }
