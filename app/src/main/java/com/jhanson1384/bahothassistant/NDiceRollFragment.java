@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class NDiceRollFragment extends DiceRollFragment {
     @Override
@@ -22,7 +23,13 @@ public class NDiceRollFragment extends DiceRollFragment {
         //Add View to allow user to modify number of die being rolled
         View choose_n_dice_container = inflater.inflate(R.layout.choose_n_dice, v, false);
         v.addView(choose_n_dice_container, 0);
+        displayNDice((TextView) choose_n_dice_container.findViewById(R.id.n_dice_label));
 
         return v;
+    }
+
+    private void displayNDice(TextView tv){
+        String text = "Number of Dice: " + diceManager.getNDice();
+        tv.setText(text);
     }
 }

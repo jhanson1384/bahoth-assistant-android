@@ -17,7 +17,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import org.w3c.dom.Text;
 
 public class DiceRollFragment extends Fragment {
-    private DiceManager diceManager;
+    protected DiceManager diceManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
