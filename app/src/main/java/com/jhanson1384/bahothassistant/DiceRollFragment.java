@@ -68,5 +68,9 @@ public class DiceRollFragment extends Fragment {
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
             dice_board.addView(die_img);
         }
+
+        //Change button text from "Roll" to "Reroll"
+        Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
+        roll_btn.setText("Reroll");
     }
 }
