@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
+
+import org.w3c.dom.Text;
 
 public class DiceRollFragment extends Fragment {
     private DiceManager diceManager;
@@ -68,9 +71,18 @@ public class DiceRollFragment extends Fragment {
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
             dice_board.addView(die_img);
         }
+        displayRollSum();
 
         //Change button text from "Roll" to "Reroll"
         Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
         roll_btn.setText("Reroll");
+    }
+
+    private void displayRollSum(){
+        TextView roll_sum = (TextView) getActivity().findViewById(R.id.roll_sum);
+        String view_text = "Sum: " + diceManager.sum();
+        roll_sum.setText(view_text);
+        //TextView is initially set to visibility:gone, make sure it is now visible
+        roll_sum.setVisibility(View.VISIBLE);
     }
 }
