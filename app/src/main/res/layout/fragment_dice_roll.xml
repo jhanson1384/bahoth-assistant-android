@@ -17,10 +17,23 @@
 
     </com.google.android.flexbox.FlexboxLayout>
 
+    <TextView
+        android:id="@+id/roll_sum"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF" />
+
     <Button
         android:id="@+id/roll_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Roll" />
+
+    <Button
+        android:id="@+id/done_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"/>
 
 </LinearLayout>

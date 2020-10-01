@@ -7,6 +7,12 @@ public class DiceManager {
     public int getNDice(){ return n_dice; }
     public int getDieVal(int ind){ return dice[ind]; }
 
+    public void adjustNDice(int diff){
+        n_dice += diff;
+        if (n_dice > 8) n_dice = 8;
+        if (n_dice < 1) n_dice = 1;
+    }
+
     public DiceManager(int n_dice){
         dice = new int[8];
         for (int i=0; i<dice.length; i++){ dice[i] = 0; }
