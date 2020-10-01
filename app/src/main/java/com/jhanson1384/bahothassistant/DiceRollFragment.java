@@ -69,6 +69,8 @@ public class DiceRollFragment extends Fragment {
         for (int i=0; i<diceManager.getNDice(); ++i){
             ImageView die_img = new ImageView(getContext());
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
+            die_img.setAdjustViewBounds(true);
+            die_img.setLayoutParams(new LinearLayout.LayoutParams(150,150));
             dice_board.addView(die_img);
         }
         displayRollSum();
