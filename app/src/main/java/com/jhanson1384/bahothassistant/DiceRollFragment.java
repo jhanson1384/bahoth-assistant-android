@@ -3,6 +3,7 @@ package com.jhanson1384.bahothassistant;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,12 @@ public class DiceRollFragment extends Fragment {
         Button roll_btn = (Button) v.findViewById(R.id.roll_btn);
         roll_btn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) { rollDice(); }
+        });
+
+        //Set OnClickListener for done button
+        Button done_btn = (Button) v.findViewById(R.id.done_btn);
+        done_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { doneBtnHandler(); }
         });
 
         return v;
@@ -86,5 +93,26 @@ public class DiceRollFragment extends Fragment {
         roll_sum.setText(view_text);
         //TextView is initially set to visibility:gone, make sure it is now visible
         roll_sum.setVisibility(View.VISIBLE);
+    }
+
+    public void doneBtnHandler(){
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Go back to main game screen
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        //Create DisplayCharacterFragment
+        DisplayCharacterFragment disp_char_frag = new DisplayCharacterFragment();
+        Bundle character_bundle = new Bundle();
+        character_bundle.putSerializable(DisplayCharacterFragment.EXTRA_CHAR_BUNDLE,
+                                         game_activity.getGame().getPC());
+        disp_char_frag.setArguments(character_bundle);
+        //Create MainActionsFragment
+        MainActionsFragment main_actions = new MainActionsFragment();
+
+        //Add fragments to activity
+        transaction.add(R.id.game_activity, disp_char_frag);
+        transaction.add(R.id.game_activity, main_actions);
+        transaction.commit();
     }
 }
