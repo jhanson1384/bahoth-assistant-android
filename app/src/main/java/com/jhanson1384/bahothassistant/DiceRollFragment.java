@@ -139,22 +139,11 @@ public class DiceRollFragment extends Fragment {
     }
 
     public void specificRerollBtnHandler(){
-        isSpecificRerollState = true;
+        setSpecificRerollState(true);
+    }
 
-        Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
-        roll_btn.setVisibility(View.GONE);
-
-        Button specific_reroll_btn = (Button) getActivity().findViewById(R.id.specific_reroll_btn);
-        specific_reroll_btn.setVisibility(View.GONE);
-
-        Button cancel_btn = (Button) getActivity().findViewById(R.id.specific_reroll_cancel);
-        cancel_btn.setVisibility(View.VISIBLE);
-
-        Button specific_reroll_confirm_btn = (Button) getActivity().findViewById(R.id.specific_reroll_confirm);
-        specific_reroll_confirm_btn.setVisibility(View.VISIBLE);
-
-        TextView specific_reroll_msg = (TextView) getActivity().findViewById(R.id.specific_reroll_msg);
-        specific_reroll_msg.setVisibility(View.VISIBLE);
+    private void specificRerollDone(){
+        setSpecificRerollState(false);
     }
 
     public void dieImgHandler(ImageView dieImg){
@@ -164,23 +153,27 @@ public class DiceRollFragment extends Fragment {
         dieImg.setImageResource(R.drawable.reroll_die);
     }
 
-    private void specificRerollDone(){
-        isSpecificRerollState = false;
+    private void setSpecificRerollState(boolean isSpecificRerollState){
+        this.isSpecificRerollState = isSpecificRerollState;
 
-        TextView specific_reroll_msg = (TextView) getActivity().findViewById(R.id.specific_reroll_msg);
-        specific_reroll_msg.setVisibility(View.GONE);
+        int originalViewVisibility = (isSpecificRerollState) ? View.GONE : View.VISIBLE;
+        int rerollViewVisibility = (isSpecificRerollState) ? View.VISIBLE : View.GONE;
 
         Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
-        roll_btn.setVisibility(View.VISIBLE);
+        roll_btn.setVisibility(originalViewVisibility);
 
         Button specific_reroll_btn = (Button) getActivity().findViewById(R.id.specific_reroll_btn);
-        specific_reroll_btn.setVisibility(View.VISIBLE);
+        specific_reroll_btn.setVisibility(originalViewVisibility);
 
         Button cancel_btn = (Button) getActivity().findViewById(R.id.specific_reroll_cancel);
-        cancel_btn.setVisibility(View.GONE);
+        cancel_btn.setVisibility(rerollViewVisibility);
 
         Button specific_reroll_confirm_btn = (Button) getActivity().findViewById(R.id.specific_reroll_confirm);
-        specific_reroll_confirm_btn.setVisibility(View.GONE);
+        specific_reroll_confirm_btn.setVisibility(rerollViewVisibility);
+
+        TextView specific_reroll_msg = (TextView) getActivity().findViewById(R.id.specific_reroll_msg);
+        specific_reroll_msg.setVisibility(rerollViewVisibility);
     }
 }
+//TODO specificRerollBtnHandler() and specificRerollDone() do the same things but opposite
 //TODO reset die image from reroll img when clicked again, or when specific reroll cancelled
