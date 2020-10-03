@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -19,7 +20,15 @@ import org.w3c.dom.Text;
 
 public class DiceRollFragment extends Fragment {
     protected DiceManager diceManager;
-    private boolean isSpecificRerollState = false;
+    protected boolean isSpecificRerollState = false;
+    private boolean[] rerollMask;
+
+    private void resetRerollMask(){
+        //Reset mask values to false
+        for (int i=0; i<rerollMask.length; ++i){
+            rerollMask[i] = false;
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,15 @@ public class DiceRollFragment extends Fragment {
         specific_reroll_cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) { specificRerollDone(); }
         });
+
+        //Set OnClickListener for specific reroll confirm button
+        Button specific_reroll_confirm_btn = (Button) v.findViewById(R.id.specific_reroll_confirm);
+        specific_reroll_confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { rollDiceSpecific(); }
+        });
+
+        rerollMask = new boolean[8];
+        resetRerollMask();
 
         return v;
     }
@@ -109,33 +127,35 @@ public class DiceRollFragment extends Fragment {
         specific_reroll_btn.setVisibility(View.VISIBLE);
     }
 
-    private void displayRollSum(){
-        TextView roll_sum = (TextView) getActivity().findViewById(R.id.roll_sum);
-        String view_text = "Sum: " + diceManager.sum();
-        roll_sum.setText(view_text);
-        //TextView is initially set to visibility:gone, make sure it is now visible
-        roll_sum.setVisibility(View.VISIBLE);
+    public void rollDiceSpecific(){
+        ViewGroup dice_board = (ViewGroup) getActivity().findViewById(R.id.dice_board);
+
+        for (int i=0; i<diceManager.getNDice(); ++i){
+            if (rerollMask[i]){
+                diceManager.reroll(i);
+
+                ImageView die_img = (ImageView) dice_board.getChildAt(i);
+                die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
+            }
+        }
+        displayRollSum();
+
+        setSpecificRerollState(false);
     }
 
-    public void doneBtnHandler(){
-        GameActivity game_activity = (GameActivity) getActivity();
-        game_activity.clearFragments();
+    public void dieImgHandler(ImageView dieImg){
+        //Do nothing if not choosing dice for specific reroll
+        if (!isSpecificRerollState) return;
 
-        //Go back to main game screen
-        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
-        //Create DisplayCharacterFragment
-        DisplayCharacterFragment disp_char_frag = new DisplayCharacterFragment();
-        Bundle character_bundle = new Bundle();
-        character_bundle.putSerializable(DisplayCharacterFragment.EXTRA_CHAR_BUNDLE,
-                                         game_activity.getGame().getPC());
-        disp_char_frag.setArguments(character_bundle);
-        //Create MainActionsFragment
-        MainActionsFragment main_actions = new MainActionsFragment();
+        int ind = ((ViewGroup) dieImg.getParent()).indexOfChild(dieImg);
 
-        //Add fragments to activity
-        transaction.add(R.id.game_activity, disp_char_frag);
-        transaction.add(R.id.game_activity, main_actions);
-        transaction.commit();
+        if (rerollMask[ind]){
+            dieImg.setImageResource(getDiceImgID(diceManager.getDieVal(ind)));
+            rerollMask[ind] = false;
+        }else{
+            dieImg.setImageResource(R.drawable.reroll_die);
+            rerollMask[ind] = true;
+        }
     }
 
     public void specificRerollBtnHandler(){
@@ -144,17 +164,18 @@ public class DiceRollFragment extends Fragment {
 
     private void specificRerollDone(){
         setSpecificRerollState(false);
-    }
 
-    public void dieImgHandler(ImageView dieImg){
-        //Do nothing if not choosing dice for specific reroll
-        if (!isSpecificRerollState) return;
-
-        dieImg.setImageResource(R.drawable.reroll_die);
+        //Restore original view images
+        ViewGroup parent = getActivity().findViewById(R.id.dice_board);
+        for (int i=0; i<parent.getChildCount(); ++i){
+            ((ImageView) parent.getChildAt(i)).setImageResource(getDiceImgID(diceManager.getDieVal(i)));
+        }
     }
 
     private void setSpecificRerollState(boolean isSpecificRerollState){
         this.isSpecificRerollState = isSpecificRerollState;
+
+        if (isSpecificRerollState) resetRerollMask();
 
         int originalViewVisibility = (isSpecificRerollState) ? View.GONE : View.VISIBLE;
         int rerollViewVisibility = (isSpecificRerollState) ? View.VISIBLE : View.GONE;
@@ -174,6 +195,33 @@ public class DiceRollFragment extends Fragment {
         TextView specific_reroll_msg = (TextView) getActivity().findViewById(R.id.specific_reroll_msg);
         specific_reroll_msg.setVisibility(rerollViewVisibility);
     }
+
+    private void displayRollSum(){
+        TextView roll_sum = (TextView) getActivity().findViewById(R.id.roll_sum);
+        String view_text = "Sum: " + diceManager.sum();
+        roll_sum.setText(view_text);
+        //TextView is initially set to visibility:gone, make sure it is now visible
+        roll_sum.setVisibility(View.VISIBLE);
+    }
+
+    public void doneBtnHandler(){
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Go back to main game screen
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        //Create DisplayCharacterFragment
+        DisplayCharacterFragment disp_char_frag = new DisplayCharacterFragment();
+        Bundle character_bundle = new Bundle();
+        character_bundle.putSerializable(DisplayCharacterFragment.EXTRA_CHAR_BUNDLE,
+                game_activity.getGame().getPC());
+        disp_char_frag.setArguments(character_bundle);
+        //Create MainActionsFragment
+        MainActionsFragment main_actions = new MainActionsFragment();
+
+        //Add fragments to activity
+        transaction.add(R.id.game_activity, disp_char_frag);
+        transaction.add(R.id.game_activity, main_actions);
+        transaction.commit();
+    }
 }
-//TODO specificRerollBtnHandler() and specificRerollDone() do the same things but opposite
-//TODO reset die image from reroll img when clicked again, or when specific reroll cancelled
