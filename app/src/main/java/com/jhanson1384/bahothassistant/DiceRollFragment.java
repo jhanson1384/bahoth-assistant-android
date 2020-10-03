@@ -46,6 +46,12 @@ public class DiceRollFragment extends Fragment {
             @Override public void onClick(View view) { doneBtnHandler(); }
         });
 
+        //Set OnClickListener for specific reroll button
+        Button specific_reroll_btn = (Button) v.findViewById(R.id.specific_reroll_btn);
+        specific_reroll_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { specificRerollBtnHandler(); }
+        });
+
         return v;
     }
 
@@ -85,6 +91,10 @@ public class DiceRollFragment extends Fragment {
         //Change button text from "Roll" to "Reroll"
         Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
         roll_btn.setText("Reroll");
+
+        //Make specific reroll button visible
+        Button specific_reroll_btn = (Button) getActivity().findViewById(R.id.specific_reroll_btn);
+        specific_reroll_btn.setVisibility(View.VISIBLE);
     }
 
     private void displayRollSum(){
@@ -114,5 +124,9 @@ public class DiceRollFragment extends Fragment {
         transaction.add(R.id.game_activity, disp_char_frag);
         transaction.add(R.id.game_activity, main_actions);
         transaction.commit();
+    }
+
+    public void specificRerollBtnHandler(){
+        //TODO
     }
 }
