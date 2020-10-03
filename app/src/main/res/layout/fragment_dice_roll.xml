@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context=".DiceRollFragment">
 
+    <TextView
+        android:id="@+id/specific_reroll_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        android:text="Select dice to be rerolled"/>
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/dice_board"
@@ -13,9 +20,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:flexWrap="wrap">
-
-    </com.google.android.flexbox.FlexboxLayout>
+        app:flexWrap="wrap"/>
 
     <TextView
         android:id="@+id/roll_sum"
@@ -24,11 +29,38 @@
         android:layout_height="wrap_content"
         android:textColor="#FFFFFF" />
 
-    <Button
-        android:id="@+id/roll_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Roll" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/roll_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll" />
+
+        <Button
+            android:id="@+id/specific_reroll_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Reroll Specific Dice"/>
+
+        <Button
+            android:id="@+id/specific_reroll_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Cancel"/>
+
+        <Button
+            android:id="@+id/specific_reroll_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Reroll"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/done_btn"

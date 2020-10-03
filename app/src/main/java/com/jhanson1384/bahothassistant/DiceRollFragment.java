@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -19,6 +20,15 @@ import org.w3c.dom.Text;
 
 public class DiceRollFragment extends Fragment {
     protected DiceManager diceManager;
+    protected boolean isSpecificRerollState = false;
+    private boolean[] rerollMask;
+
+    private void resetRerollMask(){
+        //Reset mask values to false
+        for (int i=0; i<rerollMask.length; ++i){
+            rerollMask[i] = false;
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,27 @@ public class DiceRollFragment extends Fragment {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) { doneBtnHandler(); }
         });
+
+        //Set OnClickListener for specific reroll button
+        Button specific_reroll_btn = (Button) v.findViewById(R.id.specific_reroll_btn);
+        specific_reroll_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { specificRerollBtnHandler(); }
+        });
+
+        //Set OnClickListener for specific reroll cancel button
+        Button specific_reroll_cancel_btn = (Button) v.findViewById(R.id.specific_reroll_cancel);
+        specific_reroll_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { specificRerollDone(); }
+        });
+
+        //Set OnClickListener for specific reroll confirm button
+        Button specific_reroll_confirm_btn = (Button) v.findViewById(R.id.specific_reroll_confirm);
+        specific_reroll_confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { rollDiceSpecific(); }
+        });
+
+        rerollMask = new boolean[8];
+        resetRerollMask();
 
         return v;
     }
@@ -75,6 +106,11 @@ public class DiceRollFragment extends Fragment {
         //Add new dice to board
         for (int i=0; i<diceManager.getNDice(); ++i){
             ImageView die_img = new ImageView(getContext());
+            die_img.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View view) {
+                    dieImgHandler((ImageView) view);
+                }
+            });
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
             die_img.setAdjustViewBounds(true);
             die_img.setLayoutParams(new LinearLayout.LayoutParams(150,150));
@@ -85,6 +121,79 @@ public class DiceRollFragment extends Fragment {
         //Change button text from "Roll" to "Reroll"
         Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
         roll_btn.setText("Reroll");
+
+        //Make specific reroll button visible
+        Button specific_reroll_btn = (Button) getActivity().findViewById(R.id.specific_reroll_btn);
+        specific_reroll_btn.setVisibility(View.VISIBLE);
+    }
+
+    public void rollDiceSpecific(){
+        ViewGroup dice_board = (ViewGroup) getActivity().findViewById(R.id.dice_board);
+
+        for (int i=0; i<diceManager.getNDice(); ++i){
+            if (rerollMask[i]){
+                diceManager.reroll(i);
+
+                ImageView die_img = (ImageView) dice_board.getChildAt(i);
+                die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
+            }
+        }
+        displayRollSum();
+
+        setSpecificRerollState(false);
+    }
+
+    public void dieImgHandler(ImageView dieImg){
+        //Do nothing if not choosing dice for specific reroll
+        if (!isSpecificRerollState) return;
+
+        int ind = ((ViewGroup) dieImg.getParent()).indexOfChild(dieImg);
+
+        if (rerollMask[ind]){
+            dieImg.setImageResource(getDiceImgID(diceManager.getDieVal(ind)));
+            rerollMask[ind] = false;
+        }else{
+            dieImg.setImageResource(R.drawable.reroll_die);
+            rerollMask[ind] = true;
+        }
+    }
+
+    public void specificRerollBtnHandler(){
+        setSpecificRerollState(true);
+    }
+
+    private void specificRerollDone(){
+        setSpecificRerollState(false);
+
+        //Restore original view images
+        ViewGroup parent = getActivity().findViewById(R.id.dice_board);
+        for (int i=0; i<parent.getChildCount(); ++i){
+            ((ImageView) parent.getChildAt(i)).setImageResource(getDiceImgID(diceManager.getDieVal(i)));
+        }
+    }
+
+    private void setSpecificRerollState(boolean isSpecificRerollState){
+        this.isSpecificRerollState = isSpecificRerollState;
+
+        if (isSpecificRerollState) resetRerollMask();
+
+        int originalViewVisibility = (isSpecificRerollState) ? View.GONE : View.VISIBLE;
+        int rerollViewVisibility = (isSpecificRerollState) ? View.VISIBLE : View.GONE;
+
+        Button roll_btn = (Button) getActivity().findViewById(R.id.roll_btn);
+        roll_btn.setVisibility(originalViewVisibility);
+
+        Button specific_reroll_btn = (Button) getActivity().findViewById(R.id.specific_reroll_btn);
+        specific_reroll_btn.setVisibility(originalViewVisibility);
+
+        Button cancel_btn = (Button) getActivity().findViewById(R.id.specific_reroll_cancel);
+        cancel_btn.setVisibility(rerollViewVisibility);
+
+        Button specific_reroll_confirm_btn = (Button) getActivity().findViewById(R.id.specific_reroll_confirm);
+        specific_reroll_confirm_btn.setVisibility(rerollViewVisibility);
+
+        TextView specific_reroll_msg = (TextView) getActivity().findViewById(R.id.specific_reroll_msg);
+        specific_reroll_msg.setVisibility(rerollViewVisibility);
     }
 
     private void displayRollSum(){
@@ -105,7 +214,7 @@ public class DiceRollFragment extends Fragment {
         DisplayCharacterFragment disp_char_frag = new DisplayCharacterFragment();
         Bundle character_bundle = new Bundle();
         character_bundle.putSerializable(DisplayCharacterFragment.EXTRA_CHAR_BUNDLE,
-                                         game_activity.getGame().getPC());
+                game_activity.getGame().getPC());
         disp_char_frag.setArguments(character_bundle);
         //Create MainActionsFragment
         MainActionsFragment main_actions = new MainActionsFragment();

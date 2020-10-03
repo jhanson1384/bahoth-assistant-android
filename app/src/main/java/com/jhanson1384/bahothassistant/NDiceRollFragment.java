@@ -47,6 +47,7 @@ public class NDiceRollFragment extends DiceRollFragment {
     }
 
     public void adjustNDice(int diff){
+        if (isSpecificRerollState) return;
         diceManager.adjustNDice(diff);
         displayNDice(null);
     }
