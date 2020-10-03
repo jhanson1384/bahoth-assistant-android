@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 
 public class DiceRollFragment extends Fragment {
     protected DiceManager diceManager;
+    private boolean isSpecificRerollState = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,11 @@ public class DiceRollFragment extends Fragment {
         //Add new dice to board
         for (int i=0; i<diceManager.getNDice(); ++i){
             ImageView die_img = new ImageView(getContext());
+            die_img.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View view) {
+                    dieImgHandler((ImageView) view);
+                }
+            });
             die_img.setImageResource(getDiceImgID(diceManager.getDieVal(i)));
             die_img.setAdjustViewBounds(true);
             die_img.setLayoutParams(new LinearLayout.LayoutParams(150,150));
@@ -127,6 +133,16 @@ public class DiceRollFragment extends Fragment {
     }
 
     public void specificRerollBtnHandler(){
-        //TODO
+        isSpecificRerollState = true;
+    }
+
+    public void dieImgHandler(ImageView dieImg){
+        //Do nothing if not choosing dice for specific reroll
+        if (!isSpecificRerollState) return;
+
+        dieImg.setImageResource(R.drawable.reroll_die);
     }
 }
+
+//TODO set isSpecificRerollState to false after done rerolling
+//TODO reset die image from reroll img when clicked again
