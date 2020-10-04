@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DamageRollFragment extends NDiceRollFragment {
+    private Button apply_dmg_btn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +22,20 @@ public class DamageRollFragment extends NDiceRollFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+
+        //Change done button text to emphasize this option exits without applying damage
+        Button done_btn = (Button) v.findViewById(R.id.done_btn);
+        done_btn.setText("Done (No Damage)");
+
+        //Add Apply Damage button to view, initially gone from layout
+        apply_dmg_btn = new Button(getContext());
+        apply_dmg_btn.setText("Apply Damage");
+        apply_dmg_btn.setVisibility(View.GONE);
+        ViewGroup done_btn_container = (ViewGroup) v.findViewById(R.id.done_btn_container);
+        done_btn_container.addView(apply_dmg_btn);
+
+        return v;
     }
 
     @Override
@@ -38,5 +54,11 @@ public class DamageRollFragment extends NDiceRollFragment {
         roll_sum.setText(view_text);
         //TextView is initially set to visibility:gone, make sure it is now visible
         roll_sum.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void rollDice(){
+        super.rollDice();
+        apply_dmg_btn.setVisibility(View.VISIBLE);
     }
 }
