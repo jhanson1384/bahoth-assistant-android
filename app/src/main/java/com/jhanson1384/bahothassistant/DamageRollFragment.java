@@ -30,7 +30,6 @@ public class DamageRollFragment extends NDiceRollFragment {
 
         //Add Apply Damage button to view, initially gone from layout
         apply_dmg_btn = new Button(getContext());
-        apply_dmg_btn.setText("Apply Damage");
         apply_dmg_btn.setVisibility(View.GONE);
         ViewGroup done_btn_container = (ViewGroup) v.findViewById(R.id.done_btn_container);
         done_btn_container.addView(apply_dmg_btn);

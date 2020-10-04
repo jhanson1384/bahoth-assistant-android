@@ -3,6 +3,7 @@ package com.jhanson1384.bahothassistant;
 public class DiceManager {
     private int[] dice;
     private int n_dice;
+    private int sum;
 
     public int getNDice(){ return n_dice; }
     public int getDieVal(int ind){ return dice[ind]; }
@@ -18,6 +19,7 @@ public class DiceManager {
         for (int i=0; i<dice.length; i++){ dice[i] = 0; }
 
         this.n_dice = n_dice;
+        this.sum = 0;
     }
 
     //Randomize dice (with values 0-2)
@@ -29,14 +31,19 @@ public class DiceManager {
 
     public void reroll(int ind){
         dice[ind] = (int) (Math.random() * 3);
+        updateSum();
     }
 
     //Add up dice values
-    public int sum(){
-        int sum = 0;
+    private void updateSum(){
+        int temp_sum = 0;
         for (int i=0; i<n_dice; ++i){
-            sum += dice[i];
+            temp_sum += dice[i];
         }
+        sum = temp_sum;
+    }
+
+    public int sum(){
         return sum;
     }
 }
