@@ -196,7 +196,7 @@ public class DiceRollFragment extends Fragment {
         specific_reroll_msg.setVisibility(rerollViewVisibility);
     }
 
-    private void displayRollSum(){
+    protected void displayRollSum(){
         TextView roll_sum = (TextView) getActivity().findViewById(R.id.roll_sum);
         String view_text = "Sum: " + diceManager.sum();
         roll_sum.setText(view_text);
