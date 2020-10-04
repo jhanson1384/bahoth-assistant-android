@@ -94,7 +94,7 @@ public class DiceRollFragment extends Fragment {
     }
 
     private void initDiceManager(){
-        diceManager = new DiceManager(8);
+        diceManager = new DiceManager(1);
     }
 
     public void rollDice(){
