@@ -75,6 +75,12 @@ public class DiceRollMenuFragment extends Fragment {
     }
 
     public void damageRollBtnHandler(){
-        Toast.makeText(getContext(), "Damage Roll Button", Toast.LENGTH_SHORT).show();
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Add DamageRollFragment to parent activity
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        DamageRollFragment damage_roll_fragment = new DamageRollFragment();
+        transaction.add(R.id.game_activity, damage_roll_fragment).commit();
     }
 }

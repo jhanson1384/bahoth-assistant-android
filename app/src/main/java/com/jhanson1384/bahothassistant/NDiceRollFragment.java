@@ -38,7 +38,7 @@ public class NDiceRollFragment extends DiceRollFragment {
         return v;
     }
 
-    private void displayNDice(TextView label){
+    protected void displayNDice(TextView label){
         TextView tv =
                 (label == null) ? (TextView) getActivity().findViewById(R.id.n_dice_label) : label;
 
