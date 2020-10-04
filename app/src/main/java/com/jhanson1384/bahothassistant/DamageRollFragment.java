@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DamageRollFragment extends NDiceRollFragment {
     private Button apply_dmg_btn;
@@ -31,6 +33,11 @@ public class DamageRollFragment extends NDiceRollFragment {
         //Add Apply Damage button to view, initially gone from layout
         apply_dmg_btn = new Button(getContext());
         apply_dmg_btn.setVisibility(View.GONE);
+        apply_dmg_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                applyDmgHandler();
+            }
+        });
         ViewGroup done_btn_container = (ViewGroup) v.findViewById(R.id.done_btn_container);
         done_btn_container.addView(apply_dmg_btn);
 
@@ -53,11 +60,18 @@ public class DamageRollFragment extends NDiceRollFragment {
         roll_sum.setText(view_text);
         //TextView is initially set to visibility:gone, make sure it is now visible
         roll_sum.setVisibility(View.VISIBLE);
+
+        String apply_dmg_text = "Apply *" + diceManager.sum() + "* Damage";
+        apply_dmg_btn.setText(apply_dmg_text);
     }
 
     @Override
     public void rollDice(){
         super.rollDice();
         apply_dmg_btn.setVisibility(View.VISIBLE);
+    }
+
+    public void applyDmgHandler(){
+        Toast.makeText(getContext(), "TODO: Apply Damage", Toast.LENGTH_LONG).show();
     }
 }
