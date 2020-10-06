@@ -121,6 +121,7 @@ public class DisplayCharacterFragment extends Fragment {
             //Highlight the TextView for the current stat value
             if (i == ind){
                 character.getColor().setBgColorHighlight(tv);
+                tv.setPadding(10, 0, 10, 0);
                 tv.setTextColor(Color.parseColor("#FFFFFF"));
             } else {
                 tv.setTextColor(Color.parseColor("#1E1E1E"));
