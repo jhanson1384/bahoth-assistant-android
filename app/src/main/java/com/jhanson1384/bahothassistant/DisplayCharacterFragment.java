@@ -108,7 +108,7 @@ public class DisplayCharacterFragment extends Fragment {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(10, 0, 10, 0);
+        params.setMargins(5, 0, 5, 0);
 
         return params;
     }
@@ -135,8 +135,9 @@ public class DisplayCharacterFragment extends Fragment {
             tv = new TextView(getContext());
 
             tv.setLayoutParams(sliderItemLayoutParams());
-            tv.setPadding(10, 0, 10, 0);
+            tv.setPadding(15, 0, 15, 0);
             tv.setText(Integer.toString(data[i]));
+            tv.setTextSize(17);
             tv.setTypeface(ResourcesCompat.getFont(getContext(), R.font.abril_fatface));
 
             if (i==ind){
