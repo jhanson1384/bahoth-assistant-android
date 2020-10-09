@@ -104,27 +104,45 @@ public class DisplayCharacterFragment extends Fragment {
         character.getColor().setBgColorBorder(knowledge_scale);
     }
 
+    private LinearLayout.LayoutParams sliderItemLayoutParams(){
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10, 0, 10, 0);
+
+        return params;
+    }
+
+    //Highlight a slider item with a circle
+    //highlightLevel determines the shade of the highlight: 0=none, 1=light, 2=dark
+    private void highlightSliderItem(TextView tv, int highlightLevel){
+        switch (highlightLevel){
+            case 0:
+                tv.setTextColor(Color.parseColor("#1E1E1E"));
+                break;
+            default:
+                character.getColor().setBgColorHighlight(tv);
+                tv.setTextColor(Color.parseColor("#FFFFFF"));
+                break;
+        }
+    }
+
+
     private void initStatViews(TextView[] views, LinearLayout layout, int[] data, int ind){
         TextView tv;
         for (int i=0; i<views.length; ++i){
             tv = views[i];
             tv = new TextView(getContext());
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(20, 0, 20, 0);
-            tv.setLayoutParams(params);
-
+            tv.setLayoutParams(sliderItemLayoutParams());
+            tv.setPadding(10, 0, 10, 0);
             tv.setText(Integer.toString(data[i]));
             tv.setTypeface(ResourcesCompat.getFont(getContext(), R.font.abril_fatface));
-            //Highlight the TextView for the current stat value
-            if (i == ind){
-                character.getColor().setBgColorHighlight(tv);
-                tv.setPadding(10, 0, 10, 0);
-                tv.setTextColor(Color.parseColor("#FFFFFF"));
-            } else {
-                tv.setTextColor(Color.parseColor("#1E1E1E"));
+
+            if (i==ind){
+                highlightSliderItem(tv, 2);
+            }else{
+                highlightSliderItem(tv, 0);
             }
 
             layout.addView(tv);
