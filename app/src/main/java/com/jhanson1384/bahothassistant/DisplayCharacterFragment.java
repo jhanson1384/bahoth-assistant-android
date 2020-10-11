@@ -39,6 +39,62 @@ public class DisplayCharacterFragment extends Fragment {
     private LinearLayout sanity_scale;
     private LinearLayout knowledge_scale;
 
+    private TextView[] getStatSliderViews(StatType st){
+        switch (st){
+            case SPEED:
+                return speed_values;
+            case MIGHT:
+                return might_values;
+            case SANITY:
+                return sanity_values;
+            case KNOWLEDGE:
+                return knowledge_values;
+        }
+        return speed_values;
+    }
+
+    private int[] getStatSliderData(StatType st){
+        switch (st){
+            case SPEED:
+                return character.getSpeedScale();
+            case MIGHT:
+                return character.getMightScale();
+            case SANITY:
+                return character.getSanityScale();
+            case KNOWLEDGE:
+                return character.getKnowledgeScale();
+        }
+        return character.getSpeedScale();
+    }
+
+    private int getStatSliderInd(StatType st){
+        switch (st){
+            case SPEED:
+                return character.getSpeedInd();
+            case MIGHT:
+                return character.getMightInd();
+            case SANITY:
+                return character.getSanityInd();
+            case KNOWLEDGE:
+                return character.getKnowledgeInd();
+        }
+        return character.getSpeedInd();
+    }
+
+    private LinearLayout getStatLayout(StatType st){
+        switch (st){
+            case SPEED:
+                return speed_scale;
+            case MIGHT:
+                return might_scale;
+            case SANITY:
+                return sanity_scale;
+            case KNOWLEDGE:
+                return knowledge_scale;
+        }
+        return speed_scale;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +132,10 @@ public class DisplayCharacterFragment extends Fragment {
         might_scale = (LinearLayout) v.findViewById(R.id.might_scale_frame);
         sanity_scale = (LinearLayout) v.findViewById(R.id.sanity_scale_frame);
         knowledge_scale = (LinearLayout) v.findViewById(R.id.knowledge_scale_frame);
-        initStatViews(speed_values, speed_scale, character.getSpeedScale(), character.getSpeedInd());
-        initStatViews(might_values, might_scale, character.getMightScale(), character.getMightInd());
-        initStatViews(sanity_values, sanity_scale, character.getSanityScale(), character.getSanityInd());
-        initStatViews(knowledge_values, knowledge_scale, character.getKnowledgeScale(), character.getKnowledgeInd());
+        initStatViews(StatType.SPEED);
+        initStatViews(StatType.MIGHT);
+        initStatViews(StatType.SANITY);
+        initStatViews(StatType.KNOWLEDGE);
 
         //Initialize view contents
         updateViewContents();
@@ -127,13 +183,47 @@ public class DisplayCharacterFragment extends Fragment {
         }
     }
 
+    //Set OnClickHandler based on StatType
+    public void setStatOCH(TextView tv, StatType st){
+        switch (st){
+            case SPEED:
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.SPEED); }
+                });
+                return;
+            case MIGHT:
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.MIGHT); }
+                });
+                return;
+            case SANITY:
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.SANITY); }
+                });
+                return;
+            case KNOWLEDGE:
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.KNOWLEDGE); }
+                });
+                return;
+        }
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.SPEED); }
+        });
+    }
+
     //Slider Item On Click Handler
-    public void sliderItemOCH(TextView tv){
+    public void sliderItemOCH(TextView tv, StatType st){
         Toast.makeText(getContext(), "Slider Item Clicked", Toast.LENGTH_SHORT).show();
     }
 
+    private void initStatViews(StatType st){
+        //Get relevant fields based on StatType
+        TextView[] views = getStatSliderViews(st);
+        LinearLayout layout = getStatLayout(st);
+        int[] data = getStatSliderData(st);
+        int ind = getStatSliderInd(st);
 
-    private void initStatViews(TextView[] views, LinearLayout layout, int[] data, int ind){
         TextView tv;
         for (int i=0; i<views.length; ++i){
             tv = views[i];
@@ -151,9 +241,8 @@ public class DisplayCharacterFragment extends Fragment {
                 highlightSliderItem(tv, 0);
             }
 
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View view) { sliderItemOCH((TextView) view); }
-            });
+            //Set OnClickHandler
+            setStatOCH(tv, st);
 
             layout.addView(tv);
         }
