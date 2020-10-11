@@ -127,6 +127,11 @@ public class DisplayCharacterFragment extends Fragment {
         }
     }
 
+    //Slider Item On Click Handler
+    public void sliderItemOCH(TextView tv){
+        Toast.makeText(getContext(), "Slider Item Clicked", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void initStatViews(TextView[] views, LinearLayout layout, int[] data, int ind){
         TextView tv;
@@ -145,6 +150,10 @@ public class DisplayCharacterFragment extends Fragment {
             }else{
                 highlightSliderItem(tv, 0);
             }
+
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View view) { sliderItemOCH((TextView) view); }
+            });
 
             layout.addView(tv);
         }
