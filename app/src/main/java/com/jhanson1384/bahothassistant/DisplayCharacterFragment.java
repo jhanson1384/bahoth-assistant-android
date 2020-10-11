@@ -38,6 +38,42 @@ public class DisplayCharacterFragment extends Fragment {
     private LinearLayout might_scale;
     private LinearLayout sanity_scale;
     private LinearLayout knowledge_scale;
+    //Index of temporarily selected stat slider items
+    private int temp_speed_ind = -2;
+    private int temp_might_ind = -2;
+    private int temp_sanity_ind = -2;
+    private int temp_knowledge_ind = -2;
+
+    private int getTempStatInd(StatType st){
+        switch (st){
+            case SPEED:
+                return temp_speed_ind;
+            case MIGHT:
+                return temp_might_ind;
+            case SANITY:
+                return temp_sanity_ind;
+            case KNOWLEDGE:
+                return temp_knowledge_ind;
+        }
+        return temp_speed_ind;
+    }
+
+    private void setTempStatInd(StatType st, int ind){
+        switch (st){
+            case SPEED:
+                temp_speed_ind = ind;
+                return;
+            case MIGHT:
+                temp_might_ind = ind;
+                return;
+            case SANITY:
+                temp_sanity_ind = ind;
+                return;
+            case KNOWLEDGE:
+                temp_knowledge_ind = ind;
+                return;
+        }
+    }
 
     private TextView[] getStatSliderViews(StatType st){
         switch (st){
@@ -93,6 +129,26 @@ public class DisplayCharacterFragment extends Fragment {
                 return knowledge_scale;
         }
         return speed_scale;
+    }
+
+    private View getStatView(StatType st, int ind){
+        LinearLayout layout = getView().findViewById(R.id.speed_scale_frame);
+        switch (st){
+            case SPEED:
+                layout = getView().findViewById(R.id.speed_scale_frame);
+                break;
+            case MIGHT:
+                layout = getView().findViewById(R.id.might_scale_frame);
+                break;
+            case SANITY:
+                layout = getView().findViewById(R.id.sanity_scale_frame);
+                break;
+            case KNOWLEDGE:
+                layout = getView().findViewById(R.id.knowledge_scale_frame);
+                break;
+        }
+
+        return layout.getChildAt(ind + 1);
     }
 
     @Override
@@ -174,10 +230,15 @@ public class DisplayCharacterFragment extends Fragment {
     private void highlightSliderItem(TextView tv, int highlightLevel){
         switch (highlightLevel){
             case 0:
+                tv.setBackgroundResource(0);
                 tv.setTextColor(Color.parseColor("#1E1E1E"));
                 break;
+            case 1:
+                character.getColor().setBgColorHighlight(tv, true);
+                tv.setTextColor(Color.parseColor("#FFFFFF"));
+                break;
             default:
-                character.getColor().setBgColorHighlight(tv);
+                character.getColor().setBgColorHighlight(tv, false);
                 tv.setTextColor(Color.parseColor("#FFFFFF"));
                 break;
         }
@@ -214,7 +275,21 @@ public class DisplayCharacterFragment extends Fragment {
 
     //Slider Item On Click Handler
     public void sliderItemOCH(TextView tv, StatType st){
-        Toast.makeText(getContext(), "Slider Item Clicked", Toast.LENGTH_SHORT).show();
+        int index = ((ViewGroup) tv.getParent()).indexOfChild(tv) - 1;
+
+        //De-Select current slider item, if any
+        int old_ind = getTempStatInd(st);
+        if (old_ind >= 0 && old_ind != getStatSliderInd(st)){
+            TextView old_view = (TextView) getStatView(st, old_ind);
+            highlightSliderItem(old_view, 0);
+        }
+
+        setTempStatInd(st, index);
+
+        //Do nothing if current value is selected
+        if (index != getStatSliderInd(st)) {
+            highlightSliderItem(tv, 1);
+        }
     }
 
     private void initStatViews(StatType st){
