@@ -39,10 +39,10 @@ public class DisplayCharacterFragment extends Fragment {
     private LinearLayout sanity_scale;
     private LinearLayout knowledge_scale;
     //Index of temporarily selected stat slider items
-    private int temp_speed_ind = -2;
-    private int temp_might_ind = -2;
-    private int temp_sanity_ind = -2;
-    private int temp_knowledge_ind = -2;
+    private int temp_speed_ind;
+    private int temp_might_ind;
+    private int temp_sanity_ind;
+    private int temp_knowledge_ind;
 
     private int getTempStatInd(StatType st){
         switch (st){
@@ -89,6 +89,20 @@ public class DisplayCharacterFragment extends Fragment {
         return speed_values;
     }
 
+    private LinearLayout getStatLayout(StatType st){
+        switch (st){
+            case SPEED:
+                return speed_scale;
+            case MIGHT:
+                return might_scale;
+            case SANITY:
+                return sanity_scale;
+            case KNOWLEDGE:
+                return knowledge_scale;
+        }
+        return speed_scale;
+    }
+
     private int[] getStatSliderData(StatType st){
         switch (st){
             case SPEED:
@@ -117,19 +131,6 @@ public class DisplayCharacterFragment extends Fragment {
         return character.getSpeedInd();
     }
 
-    private LinearLayout getStatLayout(StatType st){
-        switch (st){
-            case SPEED:
-                return speed_scale;
-            case MIGHT:
-                return might_scale;
-            case SANITY:
-                return sanity_scale;
-            case KNOWLEDGE:
-                return knowledge_scale;
-        }
-        return speed_scale;
-    }
 
     private View getStatView(StatType st, int ind){
         LinearLayout layout = getView().findViewById(R.id.speed_scale_frame);
@@ -227,6 +228,13 @@ public class DisplayCharacterFragment extends Fragment {
 
     //Highlight a slider item with a circle
     //highlightLevel determines the shade of the highlight: 0=none, 1=light, 2=dark
+    private void highlightGeneric(View v, int highlightLevel, int index){
+        if (index == -1){
+            highlightSkullImg((ImageView) v, highlightLevel);
+        } else {
+            highlightSliderItem((TextView) v, highlightLevel);
+        }
+    }
     private void highlightSliderItem(TextView tv, int highlightLevel){
         switch (highlightLevel){
             case 0:
@@ -243,52 +251,69 @@ public class DisplayCharacterFragment extends Fragment {
                 break;
         }
     }
+    private void highlightSkullImg(ImageView img, int highlightLevel){
+        switch (highlightLevel){
+            case 0:
+                img.setBackgroundResource(0);
+                img.setImageResource(R.drawable.skull);
+                break;
+            case 1:
+                character.getColor().setBgColorHighlight(img, true);
+                img.setImageResource(R.drawable.white_skull);
+                break;
+            default:
+                character.getColor().setBgColorHighlight(img, false);
+                img.setImageResource(R.drawable.white_skull);
+        }
+    }
 
     //Set OnClickHandler based on StatType
-    public void setStatOCH(TextView tv, StatType st){
+    public void setStatOCH(View v, StatType st){
         switch (st){
             case SPEED:
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.SPEED); }
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.SPEED); }
                 });
                 return;
             case MIGHT:
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.MIGHT); }
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.MIGHT); }
                 });
                 return;
             case SANITY:
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.SANITY); }
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.SANITY); }
                 });
                 return;
             case KNOWLEDGE:
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.KNOWLEDGE); }
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.KNOWLEDGE); }
                 });
                 return;
         }
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) { sliderItemOCH((TextView) view, StatType.SPEED); }
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { sliderItemOCH(view, StatType.SPEED); }
         });
     }
 
     //Slider Item On Click Handler
-    public void sliderItemOCH(TextView tv, StatType st){
-        int index = ((ViewGroup) tv.getParent()).indexOfChild(tv) - 1;
+    public void sliderItemOCH(View v, StatType st){
+        int new_temp_ind = ((ViewGroup) v.getParent()).indexOfChild(v) - 1;
+        int old_temp_ind = getTempStatInd(st);
+        int current_ind = getStatSliderInd(st);
+
+        //Set new temp stat index
+        setTempStatInd(st, new_temp_ind);
 
         //De-Select current slider item, if any
-        int old_ind = getTempStatInd(st);
-        if (old_ind >= 0 && old_ind != getStatSliderInd(st)){
-            TextView old_view = (TextView) getStatView(st, old_ind);
-            highlightSliderItem(old_view, 0);
+        if (old_temp_ind != current_ind){
+            View old_view = getStatView(st, old_temp_ind);
+            highlightGeneric(old_view, 0, old_temp_ind);
         }
 
-        setTempStatInd(st, index);
-
-        //Do nothing if current value is selected
-        if (index != getStatSliderInd(st)) {
-            highlightSliderItem(tv, 1);
+        //Highlight newly selected slider item
+        if (new_temp_ind != current_ind){
+            highlightGeneric(v, 1, new_temp_ind);
         }
     }
 
@@ -298,6 +323,7 @@ public class DisplayCharacterFragment extends Fragment {
         LinearLayout layout = getStatLayout(st);
         int[] data = getStatSliderData(st);
         int ind = getStatSliderInd(st);
+        setTempStatInd(st, ind);
 
         TextView tv;
         for (int i=0; i<views.length; ++i){
@@ -319,7 +345,12 @@ public class DisplayCharacterFragment extends Fragment {
             //Set OnClickHandler
             setStatOCH(tv, st);
 
+            //Add view to layout
             layout.addView(tv);
         }
+
+        //Set OnClickHandler for skull img
+        View skull_img = layout.getChildAt(0);
+        setStatOCH(skull_img, st);
     }
 }
