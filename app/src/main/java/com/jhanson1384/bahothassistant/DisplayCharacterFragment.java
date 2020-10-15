@@ -44,6 +44,26 @@ public class DisplayCharacterFragment extends Fragment {
     private int temp_sanity_ind;
     private int temp_knowledge_ind;
 
+    public void updateStats(){
+        StatType[] all_types = {StatType.SPEED, StatType.MIGHT, StatType.SANITY, StatType.KNOWLEDGE };
+        for (StatType st : all_types){
+            int temp_ind = getTempStatInd(st);
+            //Character dies if a stat index is -1
+            if (temp_ind == -1) {} //TODO
+
+            //Un-Highlight previous stat index
+            View old_view = getStatView(st, character.getStatInd(st));
+            highlightGeneric(old_view, 0, character.getStatInd(st));
+
+            //Update character stat index
+            character.setStatInd(st, temp_ind);
+
+            //Highlight new stat index
+            int new_ind = character.getStatInd(st);
+            highlightGeneric(getStatView(st, new_ind), 2, new_ind);
+        }
+    }
+
     private int getTempStatInd(StatType st){
         switch (st){
             case SPEED:
@@ -315,6 +335,8 @@ public class DisplayCharacterFragment extends Fragment {
         if (new_temp_ind != current_ind){
             highlightGeneric(v, 1, new_temp_ind);
         }
+
+        ((GameActivity) getActivity()).setAdjustmentState(true);
     }
 
     private void initStatViews(StatType st){

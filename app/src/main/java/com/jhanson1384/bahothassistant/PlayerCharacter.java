@@ -291,6 +291,38 @@ public class PlayerCharacter implements Serializable {
     public int[] getSanityScale() { return this.sanity_scale; }
     public int[] getKnowledgeScale() { return this.knowledge_scale; }
 
+    public void setStatInd(StatType st, int ind){
+        switch (st){
+            case SPEED:
+                speed_ind = ind;
+                return;
+            case MIGHT:
+                might_ind = ind;
+                return;
+            case KNOWLEDGE:
+                knowledge_ind = ind;
+                return;
+            case SANITY:
+                sanity_ind = ind;
+                return;
+        }
+    }
+
+    //Redundant with other getters, which are now depreciated
+    public int getStatInd(StatType st){
+        switch (st){
+            case SPEED:
+                return speed_ind;
+            case MIGHT:
+                return might_ind;
+            case KNOWLEDGE:
+                return knowledge_ind;
+            case SANITY:
+                return sanity_ind;
+        }
+        return speed_ind;
+    }
+
     //Determine speed by indexing into stats scale
     public int getSpeed() {
         //Index may be zero if character is dead
