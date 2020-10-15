@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActionsFragment extends Fragment {
+    private boolean isAdjustmentState;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +70,32 @@ public class MainActionsFragment extends Fragment {
         transaction.add(R.id.game_activity, dice_roll_menu_frag).commit();
     }
 
-    public void adjustStatsBtnHandler(){
-        Toast.makeText(getContext(), "Adjust Stats Button", Toast.LENGTH_SHORT).show();
-    }
-
     public void updateOmenCounter(View view){
         View v = (view == null) ? getView() : view;
         TextView omen_counter_label = (TextView) v.findViewById(R.id.omen_counter_label);
         omen_counter_label.setText(((GameActivity) getActivity()).getGame().displayOmenCounter());
     }
+
+
+    public void adjustStatsBtnHandler(){
+        if (!isAdjustmentState) return;
+        GameActivity game_activity = (GameActivity) getActivity();
+
+        game_activity.updateStats();
+
+        setAdjustmentState(false);
+    }
+
+    public void setAdjustmentState(boolean isAdjustmentState){
+        this.isAdjustmentState = isAdjustmentState;
+
+        //Update button text
+        Button adjust_stats_btn = (Button) getActivity().findViewById(R.id.adjust_stats_btn);
+        if (isAdjustmentState){
+            adjust_stats_btn.setText("Update Stats");
+        }else{
+            adjust_stats_btn.setText("Tap above to adjust character stats");
+        }
+    }
+
 }

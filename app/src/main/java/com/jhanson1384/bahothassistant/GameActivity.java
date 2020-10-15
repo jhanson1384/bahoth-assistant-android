@@ -66,4 +66,18 @@ public class GameActivity extends AppCompatActivity {
         transaction.add(R.id.game_activity, confirm_char_frag);
         transaction.commit();
     }
+
+
+    public void setAdjustmentState(boolean isAdjustmentState){
+        Fragment fragment = frag_manager.getFragments().get(1);
+        if (!(fragment instanceof MainActionsFragment)) return;
+        MainActionsFragment main_actions_frag = (MainActionsFragment) fragment;
+        main_actions_frag.setAdjustmentState(isAdjustmentState);
+    }
+
+    public void updateStats(){
+        Fragment fragment = frag_manager.getFragments().get(0);
+        if (!(fragment instanceof DisplayCharacterFragment)) return;
+        ((DisplayCharacterFragment) fragment).updateStats();
+    }
 }

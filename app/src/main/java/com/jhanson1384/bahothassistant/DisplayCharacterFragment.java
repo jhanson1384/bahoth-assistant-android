@@ -38,6 +38,139 @@ public class DisplayCharacterFragment extends Fragment {
     private LinearLayout might_scale;
     private LinearLayout sanity_scale;
     private LinearLayout knowledge_scale;
+    //Index of temporarily selected stat slider items
+    private int temp_speed_ind;
+    private int temp_might_ind;
+    private int temp_sanity_ind;
+    private int temp_knowledge_ind;
+
+    public void updateStats(){
+        StatType[] all_types = {StatType.SPEED, StatType.MIGHT, StatType.SANITY, StatType.KNOWLEDGE };
+        for (StatType st : all_types){
+            int temp_ind = getTempStatInd(st);
+            //Character dies if a stat index is -1
+            if (temp_ind == -1) {} //TODO
+
+            //Un-Highlight previous stat index
+            View old_view = getStatView(st, character.getStatInd(st));
+            highlightGeneric(old_view, 0, character.getStatInd(st));
+
+            //Update character stat index
+            character.setStatInd(st, temp_ind);
+
+            //Highlight new stat index
+            int new_ind = character.getStatInd(st);
+            highlightGeneric(getStatView(st, new_ind), 2, new_ind);
+        }
+    }
+
+    private int getTempStatInd(StatType st){
+        switch (st){
+            case SPEED:
+                return temp_speed_ind;
+            case MIGHT:
+                return temp_might_ind;
+            case SANITY:
+                return temp_sanity_ind;
+            case KNOWLEDGE:
+                return temp_knowledge_ind;
+        }
+        return temp_speed_ind;
+    }
+
+    private void setTempStatInd(StatType st, int ind){
+        switch (st){
+            case SPEED:
+                temp_speed_ind = ind;
+                return;
+            case MIGHT:
+                temp_might_ind = ind;
+                return;
+            case SANITY:
+                temp_sanity_ind = ind;
+                return;
+            case KNOWLEDGE:
+                temp_knowledge_ind = ind;
+                return;
+        }
+    }
+
+    private TextView[] getStatSliderViews(StatType st){
+        switch (st){
+            case SPEED:
+                return speed_values;
+            case MIGHT:
+                return might_values;
+            case SANITY:
+                return sanity_values;
+            case KNOWLEDGE:
+                return knowledge_values;
+        }
+        return speed_values;
+    }
+
+    private LinearLayout getStatLayout(StatType st){
+        switch (st){
+            case SPEED:
+                return speed_scale;
+            case MIGHT:
+                return might_scale;
+            case SANITY:
+                return sanity_scale;
+            case KNOWLEDGE:
+                return knowledge_scale;
+        }
+        return speed_scale;
+    }
+
+    private int[] getStatSliderData(StatType st){
+        switch (st){
+            case SPEED:
+                return character.getSpeedScale();
+            case MIGHT:
+                return character.getMightScale();
+            case SANITY:
+                return character.getSanityScale();
+            case KNOWLEDGE:
+                return character.getKnowledgeScale();
+        }
+        return character.getSpeedScale();
+    }
+
+    private int getStatSliderInd(StatType st){
+        switch (st){
+            case SPEED:
+                return character.getSpeedInd();
+            case MIGHT:
+                return character.getMightInd();
+            case SANITY:
+                return character.getSanityInd();
+            case KNOWLEDGE:
+                return character.getKnowledgeInd();
+        }
+        return character.getSpeedInd();
+    }
+
+
+    private View getStatView(StatType st, int ind){
+        LinearLayout layout = getView().findViewById(R.id.speed_scale_frame);
+        switch (st){
+            case SPEED:
+                layout = getView().findViewById(R.id.speed_scale_frame);
+                break;
+            case MIGHT:
+                layout = getView().findViewById(R.id.might_scale_frame);
+                break;
+            case SANITY:
+                layout = getView().findViewById(R.id.sanity_scale_frame);
+                break;
+            case KNOWLEDGE:
+                layout = getView().findViewById(R.id.knowledge_scale_frame);
+                break;
+        }
+
+        return layout.getChildAt(ind + 1);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,10 +209,10 @@ public class DisplayCharacterFragment extends Fragment {
         might_scale = (LinearLayout) v.findViewById(R.id.might_scale_frame);
         sanity_scale = (LinearLayout) v.findViewById(R.id.sanity_scale_frame);
         knowledge_scale = (LinearLayout) v.findViewById(R.id.knowledge_scale_frame);
-        initStatViews(speed_values, speed_scale, character.getSpeedScale(), character.getSpeedInd());
-        initStatViews(might_values, might_scale, character.getMightScale(), character.getMightInd());
-        initStatViews(sanity_values, sanity_scale, character.getSanityScale(), character.getSanityInd());
-        initStatViews(knowledge_values, knowledge_scale, character.getKnowledgeScale(), character.getKnowledgeInd());
+        initStatViews(StatType.SPEED);
+        initStatViews(StatType.MIGHT);
+        initStatViews(StatType.SANITY);
+        initStatViews(StatType.KNOWLEDGE);
 
         //Initialize view contents
         updateViewContents();
@@ -104,29 +237,142 @@ public class DisplayCharacterFragment extends Fragment {
         character.getColor().setBgColorBorder(knowledge_scale);
     }
 
-    private void initStatViews(TextView[] views, LinearLayout layout, int[] data, int ind){
+    private LinearLayout.LayoutParams sliderItemLayoutParams(){
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(5, 0, 5, 0);
+
+        return params;
+    }
+
+    //Highlight a slider item with a circle
+    //highlightLevel determines the shade of the highlight: 0=none, 1=light, 2=dark
+    private void highlightGeneric(View v, int highlightLevel, int index){
+        if (index == -1){
+            highlightSkullImg((ImageView) v, highlightLevel);
+        } else {
+            highlightSliderItem((TextView) v, highlightLevel);
+        }
+    }
+    private void highlightSliderItem(TextView tv, int highlightLevel){
+        switch (highlightLevel){
+            case 0:
+                tv.setBackgroundResource(0);
+                tv.setTextColor(Color.parseColor("#1E1E1E"));
+                break;
+            case 1:
+                character.getColor().setBgColorHighlight(tv, true);
+                tv.setTextColor(Color.parseColor("#FFFFFF"));
+                break;
+            default:
+                character.getColor().setBgColorHighlight(tv, false);
+                tv.setTextColor(Color.parseColor("#FFFFFF"));
+                break;
+        }
+    }
+    private void highlightSkullImg(ImageView img, int highlightLevel){
+        switch (highlightLevel){
+            case 0:
+                img.setBackgroundResource(0);
+                img.setImageResource(R.drawable.skull);
+                break;
+            case 1:
+                character.getColor().setBgColorHighlight(img, true);
+                img.setImageResource(R.drawable.white_skull);
+                break;
+            default:
+                character.getColor().setBgColorHighlight(img, false);
+                img.setImageResource(R.drawable.white_skull);
+        }
+    }
+
+    //Set OnClickHandler based on StatType
+    public void setStatOCH(View v, StatType st){
+        switch (st){
+            case SPEED:
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.SPEED); }
+                });
+                return;
+            case MIGHT:
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.MIGHT); }
+                });
+                return;
+            case SANITY:
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.SANITY); }
+                });
+                return;
+            case KNOWLEDGE:
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) { sliderItemOCH(view, StatType.KNOWLEDGE); }
+                });
+                return;
+        }
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { sliderItemOCH(view, StatType.SPEED); }
+        });
+    }
+
+    //Slider Item On Click Handler
+    public void sliderItemOCH(View v, StatType st){
+        int new_temp_ind = ((ViewGroup) v.getParent()).indexOfChild(v) - 1;
+        int old_temp_ind = getTempStatInd(st);
+        int current_ind = getStatSliderInd(st);
+
+        //Set new temp stat index
+        setTempStatInd(st, new_temp_ind);
+
+        //De-Select current slider item, if any
+        if (old_temp_ind != current_ind){
+            View old_view = getStatView(st, old_temp_ind);
+            highlightGeneric(old_view, 0, old_temp_ind);
+        }
+
+        //Highlight newly selected slider item
+        if (new_temp_ind != current_ind){
+            highlightGeneric(v, 1, new_temp_ind);
+        }
+
+        ((GameActivity) getActivity()).setAdjustmentState(true);
+    }
+
+    private void initStatViews(StatType st){
+        //Get relevant fields based on StatType
+        TextView[] views = getStatSliderViews(st);
+        LinearLayout layout = getStatLayout(st);
+        int[] data = getStatSliderData(st);
+        int ind = getStatSliderInd(st);
+        setTempStatInd(st, ind);
+
         TextView tv;
         for (int i=0; i<views.length; ++i){
             tv = views[i];
             tv = new TextView(getContext());
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(20, 0, 20, 0);
-            tv.setLayoutParams(params);
-
+            tv.setLayoutParams(sliderItemLayoutParams());
+            tv.setPadding(15, 0, 15, 0);
             tv.setText(Integer.toString(data[i]));
+            tv.setTextSize(17);
             tv.setTypeface(ResourcesCompat.getFont(getContext(), R.font.abril_fatface));
-            //Highlight the TextView for the current stat value
-            if (i == ind){
-                character.getColor().setBgColorHighlight(tv);
-                tv.setTextColor(Color.parseColor("#FFFFFF"));
-            } else {
-                tv.setTextColor(Color.parseColor("#1E1E1E"));
+
+            if (i==ind){
+                highlightSliderItem(tv, 2);
+            }else{
+                highlightSliderItem(tv, 0);
             }
 
+            //Set OnClickHandler
+            setStatOCH(tv, st);
+
+            //Add view to layout
             layout.addView(tv);
         }
+
+        //Set OnClickHandler for skull img
+        View skull_img = layout.getChildAt(0);
+        setStatOCH(skull_img, st);
     }
 }

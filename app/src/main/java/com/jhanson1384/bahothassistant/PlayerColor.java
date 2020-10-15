@@ -87,7 +87,11 @@ public enum PlayerColor {
         }
     }
 
-    public void setBgColorHighlight(View v){
-        v.setBackgroundResource(R.drawable.white_bg_highlight);
+    public void setBgColorHighlight(View v, boolean isLight){
+        if (isLight){
+            v.setBackgroundResource(R.drawable.white_bg_light_highlight);
+        }else {
+            v.setBackgroundResource(R.drawable.white_bg_highlight);
+        }
     }
 }
