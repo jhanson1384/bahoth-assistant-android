@@ -34,15 +34,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bahoth_title_img" />
 
-    <Button
-        android:id="@+id/new_game_btn"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:onClick="newGameBtnHandler"
-        android:text="@string/new_game_btn_text"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_header_img" />
+        app:layout_constraintTop_toBottomOf="@+id/menu_header_img"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/game_over_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/abril_fatface"
+            android:textColor="#FFFFFF"
+            android:textSize="24dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="Game Over" />
+
+        <Button
+            android:id="@+id/new_game_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="newGameBtnHandler"
+            android:text="@string/new_game_btn_text" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
