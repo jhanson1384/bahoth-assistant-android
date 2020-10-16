@@ -80,4 +80,9 @@ public class GameActivity extends AppCompatActivity {
         if (!(fragment instanceof DisplayCharacterFragment)) return;
         ((DisplayCharacterFragment) fragment).updateStats();
     }
+
+    public void characterDeath(){
+        Intent intent = new Intent(this, GameOverActivity.class);
+        startActivity(intent);
+    }
 }

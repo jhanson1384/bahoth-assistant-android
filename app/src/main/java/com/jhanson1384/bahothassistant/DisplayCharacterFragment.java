@@ -49,7 +49,10 @@ public class DisplayCharacterFragment extends Fragment {
         for (StatType st : all_types){
             int temp_ind = getTempStatInd(st);
             //Character dies if a stat index is -1
-            if (temp_ind == -1) {} //TODO
+            if (temp_ind == -1) {
+                ((GameActivity) getActivity()).characterDeath();
+                return;
+            }
 
             //Un-Highlight previous stat index
             View old_view = getStatView(st, character.getStatInd(st));
