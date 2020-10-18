@@ -42,6 +42,9 @@ public class ApplyDamageFragment extends DisplayCharacterFragment {
 
         apply_dmg_btn = new Button(getContext());
         updateApplyDmgBtnText();
+        apply_dmg_btn.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) { applyDmgBtnOCH(); }
+        });
         v.addView(apply_dmg_btn);
 
         return v;
@@ -68,6 +71,15 @@ public class ApplyDamageFragment extends DisplayCharacterFragment {
         }
 
         apply_dmg_btn.setText(btn_text);
+    }
+
+    public void applyDmgBtnOCH(){
+        //Check that all damage has been allocated
+        if (sumDmgAllocated() != arg_damage) return;
+
+        //Apply changes and go back to main screen of GameActivity
+        updateStats();
+        ((GameActivity) getActivity()).initMainFragments();
     }
 
     @Override
