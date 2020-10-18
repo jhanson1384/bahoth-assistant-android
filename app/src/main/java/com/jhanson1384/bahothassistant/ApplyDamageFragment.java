@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class ApplyDamageFragment extends DisplayCharacterFragment {
 
     private static final String ARG_DAMAGE = "ApplyDamageFragment.ARG_DAMAGE";
 
     private int arg_damage;
+
+    private Button apply_dmg_btn;
 
     public static ApplyDamageFragment newInstance(int damage, PlayerCharacter character) {
         ApplyDamageFragment fragment = new ApplyDamageFragment();
@@ -34,6 +37,35 @@ public class ApplyDamageFragment extends DisplayCharacterFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        ViewGroup v = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
+
+        apply_dmg_btn = new Button(getContext());
+        updateApplyDmgBtnText();
+        v.addView(apply_dmg_btn);
+
+        return v;
+    }
+
+    private int sumDmgAllocated(){
+        int sum = 0;
+        StatType[] all_types = {StatType.SPEED, StatType.MIGHT, StatType.SANITY, StatType.KNOWLEDGE};
+
+        for (StatType st : all_types) {
+            sum += getStatSliderInd(st) - getTempStatInd(st);
+        }
+        return sum;
+    }
+
+    private void updateApplyDmgBtnText(){
+        int damage_left = arg_damage - sumDmgAllocated();
+        String btn_text;
+
+        if (damage_left == 0){
+            btn_text = "Apply Damage";
+        }else{
+            btn_text = "Tap above to allocate damage (" + damage_left + " pts left)";
+        }
+
+        apply_dmg_btn.setText(btn_text);
     }
 }

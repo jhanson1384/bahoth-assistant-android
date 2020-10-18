@@ -67,7 +67,7 @@ public class DisplayCharacterFragment extends Fragment {
         }
     }
 
-    private int getTempStatInd(StatType st){
+    protected int getTempStatInd(StatType st){
         switch (st){
             case SPEED:
                 return temp_speed_ind;
@@ -140,7 +140,7 @@ public class DisplayCharacterFragment extends Fragment {
         return character.getSpeedScale();
     }
 
-    private int getStatSliderInd(StatType st){
+    protected int getStatSliderInd(StatType st){
         switch (st){
             case SPEED:
                 return character.getSpeedInd();
