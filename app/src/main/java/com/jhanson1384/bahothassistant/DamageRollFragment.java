@@ -3,6 +3,7 @@ package com.jhanson1384.bahothassistant;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,13 @@ public class DamageRollFragment extends NDiceRollFragment {
     }
 
     public void applyDmgHandler(){
-        Toast.makeText(getContext(), "TODO: Apply Damage", Toast.LENGTH_LONG).show();
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Add ApplyDamageFragment to parent activity
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        PlayerCharacter character = ((GameActivity) getActivity()).getGame().getPC();
+        ApplyDamageFragment apply_dmg_frag = ApplyDamageFragment.newInstance(diceManager.sum(), character);
+        transaction.add(R.id.game_activity, apply_dmg_frag).commit();
     }
 }

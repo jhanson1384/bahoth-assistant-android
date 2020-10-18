@@ -12,11 +12,14 @@ public class ApplyDamageFragment extends DisplayCharacterFragment {
 
     private int arg_damage;
 
-    public static ApplyDamageFragment newInstance(int damage) {
+    public static ApplyDamageFragment newInstance(int damage, PlayerCharacter character) {
         ApplyDamageFragment fragment = new ApplyDamageFragment();
+
         Bundle args = new Bundle();
         args.putInt(ARG_DAMAGE, damage);
+        args.putSerializable(DisplayCharacterFragment.EXTRA_CHAR_BUNDLE, character);
         fragment.setArguments(args);
+
         return fragment;
     }
 
