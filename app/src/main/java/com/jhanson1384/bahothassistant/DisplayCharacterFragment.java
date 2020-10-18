@@ -81,7 +81,7 @@ public class DisplayCharacterFragment extends Fragment {
         return temp_speed_ind;
     }
 
-    private void setTempStatInd(StatType st, int ind){
+    protected void setTempStatInd(StatType st, int ind){
         switch (st){
             case SPEED:
                 temp_speed_ind = ind;
@@ -155,7 +155,7 @@ public class DisplayCharacterFragment extends Fragment {
     }
 
 
-    private View getStatView(StatType st, int ind){
+    protected View getStatView(StatType st, int ind){
         LinearLayout layout = getView().findViewById(R.id.speed_scale_frame);
         switch (st){
             case SPEED:
@@ -251,7 +251,7 @@ public class DisplayCharacterFragment extends Fragment {
 
     //Highlight a slider item with a circle
     //highlightLevel determines the shade of the highlight: 0=none, 1=light, 2=dark
-    private void highlightGeneric(View v, int highlightLevel, int index){
+    protected void highlightGeneric(View v, int highlightLevel, int index){
         if (index == -1){
             highlightSkullImg((ImageView) v, highlightLevel);
         } else {

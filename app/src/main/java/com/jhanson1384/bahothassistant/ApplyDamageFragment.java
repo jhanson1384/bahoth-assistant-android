@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ApplyDamageFragment extends DisplayCharacterFragment {
 
@@ -67,5 +68,39 @@ public class ApplyDamageFragment extends DisplayCharacterFragment {
         }
 
         apply_dmg_btn.setText(btn_text);
+    }
+
+    @Override
+    public void sliderItemOCH(View v, StatType st){
+        int old_temp_ind = getTempStatInd(st);
+        int current_ind = getStatSliderInd(st);
+        int new_temp_ind = ((ViewGroup) v.getParent()).indexOfChild(v) - 1;
+
+        //Make sure new_temp_ind is within possible bounds
+        if (new_temp_ind > current_ind){
+            Toast.makeText(getContext(), "Cannot increase stats", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int new_sum_dmg = sumDmgAllocated() + old_temp_ind - new_temp_ind;
+        if (new_sum_dmg > arg_damage){
+            Toast.makeText(getContext(), "Exceeds needed damage", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Set new temp stat index
+        setTempStatInd(st, new_temp_ind);
+
+        //De-Select current slider item, if any
+        if (old_temp_ind != current_ind){
+            View old_view = getStatView(st, old_temp_ind);
+            highlightGeneric(old_view, 0, old_temp_ind);
+        }
+
+        //Highlight newly selected slider item
+        if (new_temp_ind != current_ind){
+            highlightGeneric(v, 1, new_temp_ind);
+        }
+
+        updateApplyDmgBtnText();
     }
 }
