@@ -13,6 +13,7 @@ public class BahothGame {
         //Ensure omen counter isn't a negative number
         if (n_omens < 0) n_omens = 0;
     }
+    public int getNOmens(){ return n_omens; }
 
     public BahothGame(CharacterEnum char_type){
         this.character = new PlayerCharacter(char_type);
