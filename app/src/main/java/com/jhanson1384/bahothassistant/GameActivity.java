@@ -85,4 +85,15 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameOverActivity.class);
         startActivity(intent);
     }
+
+    public void initMainFragments(){
+        clearFragments();
+
+        //Create DisplayCharacterFragment
+        initDisplayCharFragment();
+        //Create MainActionsFragment
+        FragmentTransaction transaction = getFragManager().beginTransaction();
+        MainActionsFragment main_actions = new MainActionsFragment();
+        transaction.add(R.id.game_activity, main_actions).commit();
+    }
 }
