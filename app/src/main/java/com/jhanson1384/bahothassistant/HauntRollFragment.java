@@ -37,4 +37,9 @@ public class HauntRollFragment extends DiceRollFragment {
 
         return v;
     }
+
+    @Override
+    protected void initDiceManager(){
+        diceManager = new DiceManager(haunt_count);
+    }
 }
