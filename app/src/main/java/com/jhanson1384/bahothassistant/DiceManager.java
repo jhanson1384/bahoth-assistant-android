@@ -19,7 +19,8 @@ public class DiceManager {
         dice = new int[8];
         for (int i=0; i<dice.length; i++){ dice[i] = 0; }
 
-        this.n_dice = n_dice;
+
+        this.n_dice = (n_dice > 8) ? 8 : n_dice;
         cache_n_dice = n_dice;
     }
 

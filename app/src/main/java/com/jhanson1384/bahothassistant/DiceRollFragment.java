@@ -93,7 +93,7 @@ public class DiceRollFragment extends Fragment {
         return R.drawable.zero_die;
     }
 
-    private void initDiceManager(){
+    protected void initDiceManager(){
         diceManager = new DiceManager(1);
     }
 

@@ -61,7 +61,14 @@ public class DiceRollMenuFragment extends Fragment {
     }
 
     public void hauntRollBtnHandler(){
-        Toast.makeText(getContext(), "Haunt Roll Button", Toast.LENGTH_SHORT).show();
+        GameActivity game_activity = (GameActivity) getActivity();
+        game_activity.clearFragments();
+
+        //Add HauntRollFragment to parent activity
+        FragmentTransaction transaction = game_activity.getFragManager().beginTransaction();
+        int haunt_count = ((GameActivity) getActivity()).getGame().getNOmens();
+        HauntRollFragment haunt_roll_frag = HauntRollFragment.newInstance(haunt_count);
+        transaction.add(R.id.game_activity, haunt_roll_frag).commit();
     }
 
     public void statRollBtnHandler(){
