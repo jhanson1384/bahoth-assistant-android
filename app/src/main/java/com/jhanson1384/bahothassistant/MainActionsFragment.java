@@ -57,6 +57,11 @@ public class MainActionsFragment extends Fragment {
             }
         });
 
+        if (((GameActivity) getActivity()).getGame().isHauntStarted()){
+            incr_omen_count_btn.setVisibility(View.GONE);
+            decr_omen_count_btn.setVisibility(View.GONE);
+        }
+
         return v;
     }
 

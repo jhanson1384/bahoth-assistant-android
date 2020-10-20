@@ -41,10 +41,6 @@ public class HauntRollFragment extends DiceRollFragment {
         //Create TextView displaying haunt count
         initRollOverviewText((ViewGroup) v);
 
-        //Modify done_btn text
-        Button cancel_btn = (Button) v.findViewById(R.id.done_btn);
-        cancel_btn.setText("Cancel");
-
         return v;
     }
 
@@ -82,9 +78,12 @@ public class HauntRollFragment extends DiceRollFragment {
         roll_sum.setVisibility(View.VISIBLE);
     }
 
+
     @Override
-    public void rollDice(){
-        super.rollDice();
-        //TODO
+    public void doneBtnHandler(){
+        if (hauntHasBegun()) {
+            ((GameActivity) getActivity()).getGame().beginHaunt();
+        }
+        super.doneBtnHandler();
     }
 }
