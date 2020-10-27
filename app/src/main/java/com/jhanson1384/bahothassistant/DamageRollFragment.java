@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,12 @@ public class DamageRollFragment extends NDiceRollFragment {
 
         //Add Apply Damage button to view, initially gone from layout
         apply_dmg_btn = new Button(getContext());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                (float) 1.0
+        );
+        apply_dmg_btn.setLayoutParams(params);
         apply_dmg_btn.setVisibility(View.GONE);
         apply_dmg_btn.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {

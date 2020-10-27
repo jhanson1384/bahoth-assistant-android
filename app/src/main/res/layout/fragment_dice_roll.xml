@@ -20,6 +20,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:justifyContent="center"
         app:flexWrap="wrap"/>
 
     <TextView
@@ -31,32 +32,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
 
         <Button
             android:id="@+id/roll_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp"
             android:text="Roll" />
 
         <Button
             android:id="@+id/specific_reroll_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp"
             android:visibility="gone"
             android:text="Reroll Specific Dice"/>
 
         <Button
             android:id="@+id/specific_reroll_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp"
             android:visibility="gone"
             android:text="Cancel"/>
 
         <Button
             android:id="@+id/specific_reroll_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp"
             android:visibility="gone"
             android:text="Reroll"/>
 
@@ -69,8 +75,9 @@
 
         <Button
             android:id="@+id/done_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp"
             android:text="Done"/>
 
     </LinearLayout>
