@@ -37,3 +37,17 @@ Changes to character stats can be tracked from the character overview screen.
 
 **Example: An Event card gives your character "+2 Speed":**
 ![Adjust Stats Example](/readme-assets/adjust-stats.png)
+
+# Dice Events
+
+Various in-game events are decided by rolling dice.
+
+**NOTE: BaHotH uses special dice with values 0-2, as opposed to traditional 1-6 valued dice.**
+
+### Basic Dice Events
+
+Many events in the game require rolling a specific number of dice to determine the outcome. The basic
+dice roll feature allows the user to choose the number of dice rolled (1-8 dice) and displays the
+sum for that roll.
+
+![Basic Roll Example](/readme-assets/basic-roll.png)
